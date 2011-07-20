@@ -2212,7 +2212,7 @@ tskTCB *pxNewTCB;
 		else
 		{
 			/* Just to help debugging. */
-			//memset( pxNewTCB->pxStack, tskSTACK_FILL_BYTE, usStackDepth * sizeof( portSTACK_TYPE ) );
+			memset( pxNewTCB->pxStack, tskSTACK_FILL_BYTE, usStackDepth * sizeof( portSTACK_TYPE ) );
 		}
 	}
 

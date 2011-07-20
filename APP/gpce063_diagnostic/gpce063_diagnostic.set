@@ -13,7 +13,7 @@ BodyName=GPCE063A_064A
 
 [SetLink]
 ExeFile=1
-Output=.\Debug\gpce063_diagnostic.s37
+Output=gpce063_diagnostic.S37
 INTVEC=1
 STARTUP=1
 ALIGNRES=0
@@ -22,9 +22,10 @@ INITTABLE=1
 NONPAGE0=0
 
 [LIBRARY]
-Count=2
+Count=3
 LIB0=CMacro1216.lib
 LIB1=..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\Libmem.lib
+LIB2=..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\CLib.lib
 
 [SYMBOL]
 Count=0

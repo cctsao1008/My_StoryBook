@@ -9,10 +9,10 @@ VER=3.0.5
 #Name Begin GPCE063A_064A-Debug
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "APP"
-#PROP Default_Filter=pp;c;cxx;rc;def;r;odl;idl;hpj;bat
+#PROP Default_Filter=;cxx;rc;def;r;odl;idl;hpj;bat
 USEPARAM=FALSE
 PARAM=
-EXPORT=21949232
+EXPORT=3
 # Begin Source File
 SOURCE=main.c
 USEPARAM=FALSE
@@ -43,10 +43,10 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "Head Files"
-#PROP Default_Filter=;hpp;hxx;hm;inl
+#PROP Default_Filter=;hxx;hm;inl
 USEPARAM=FALSE
 PARAM=
-EXPORT=4950944
+EXPORT=3
 # Begin Source File
 SOURCE=gpce063_diagnostic.h
 USEPARAM=FALSE
@@ -63,10 +63,10 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=co;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=ur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
-EXPORT=0
+EXPORT=3
 # Begin Source File
 SOURCE=Makefile
 USEPARAM=FALSE
@@ -90,7 +90,7 @@ EXPORT=3
 #PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
-EXPORT=0
+EXPORT=3
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\timers.c
 USEPARAM=FALSE
@@ -137,14 +137,14 @@ SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=21798508
+EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\heap_3.c
+SOURCE=..\..\FreeRTOS\source\portable\MemMang\heap_3.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # End Group
 # End Group
@@ -158,91 +158,91 @@ SOURCE=..\..\FreeRTOS\source\include\FreeRTOS.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\projdefs.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\portable.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\mpu_wrappers.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\task.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\queue.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\timers.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\list.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\FreeRTOSConfig.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\croutine.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\StackMacros.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\portmacro.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\semphr.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # End Group
 # End SubItem
@@ -250,10 +250,10 @@ EXPORT=0
 #Name Begin GPCE063A_064A-Release
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "APP"
-#PROP Default_Filter=pp;c;cxx;rc;def;r;odl;idl;hpj;bat
+#PROP Default_Filter=;cxx;rc;def;r;odl;idl;hpj;bat
 USEPARAM=FALSE
 PARAM=
-EXPORT=21949232
+EXPORT=3
 # Begin Source File
 SOURCE=main.c
 USEPARAM=FALSE
@@ -284,10 +284,10 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "Head Files"
-#PROP Default_Filter=;hpp;hxx;hm;inl
+#PROP Default_Filter=;hxx;hm;inl
 USEPARAM=FALSE
 PARAM=
-EXPORT=4950944
+EXPORT=3
 # Begin Source File
 SOURCE=gpce063_diagnostic.h
 USEPARAM=FALSE
@@ -304,10 +304,10 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=co;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=ur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
-EXPORT=0
+EXPORT=3
 # Begin Source File
 SOURCE=Makefile
 USEPARAM=FALSE
@@ -331,7 +331,7 @@ EXPORT=3
 #PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
-EXPORT=0
+EXPORT=3
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\timers.c
 USEPARAM=FALSE
@@ -378,14 +378,14 @@ SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=21798508
+EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\heap_3.c
+SOURCE=..\..\FreeRTOS\source\portable\MemMang\heap_3.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # End Group
 # End Group
@@ -399,91 +399,91 @@ SOURCE=..\..\FreeRTOS\source\include\FreeRTOS.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\projdefs.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\portable.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\mpu_wrappers.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\task.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\queue.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\timers.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\list.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\FreeRTOSConfig.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\croutine.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\StackMacros.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\portmacro.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\semphr.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # End Group
 # End SubItem

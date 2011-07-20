@@ -51,182 +51,206 @@
     licensing and training services.
 */
 
-/* 
-
-Changes from V2.6.0
-
-	+ AVR port - Replaced the inb() and outb() functions with direct memory
-	  access.  This allows the port to be built with the 20050414 build of
-	  WinAVR.
-*/
-
-// P001 : FreeRTOS porting
-// By Ricardo
-#if 0
-#include <stdlib.h>
-#include <avr/interrupt.h>
-
-#include "FreeRTOS.h"
-#include "task.h"
-#else
-#include <stdlib.h>
-
-#include "../../../include/FreeRTOS.h"
-#include "../../../include/task.h"
-#endif
-// P001 END
-
 /*-----------------------------------------------------------
- * Implementation of functions defined in portable.h for the AVR port.
+ * Implementation of functions defined in portable.h for the Cygnal port.
  *----------------------------------------------------------*/
 
-/* Start tasks with interrupts enables. */
-#define portFLAGS_INT_ENABLED					( ( portSTACK_TYPE ) 0x80 )
+/* Standard includes. */
+#include <string.h>
 
-/* Hardware constants for timer 1. */
-#define portCLEAR_COUNTER_ON_MATCH				( ( unsigned char ) 0x08 )
-#define portPRESCALE_64							( ( unsigned char ) 0x03 )
-#define portCLOCK_PRESCALER						( ( unsigned long ) 64 )
-#define portCOMPARE_MATCH_A_INTERRUPT_ENABLE	( ( unsigned char ) 0x10 )
+/* Scheduler includes. */
+#include "../../../include/FreeRTOS.h"
+#include "../../../include/task.h"
 
-/*-----------------------------------------------------------*/
+/* Constants required to setup timer 2 to produce the RTOS tick. */
+#define portCLOCK_DIVISOR				( ( unsigned long ) 12 )
+#define portMAX_TIMER_VALUE				( ( unsigned long ) 0xffff )
+#define portENABLE_TIMER				( ( unsigned char ) 0x04 )
+#define portTIMER_2_INTERRUPT_ENABLE	( ( unsigned char ) 0x20 )
+
+/* The value used in the IE register when a task first starts. */
+#define portGLOBAL_INTERRUPT_BIT	( ( portSTACK_TYPE ) 0x80 )
+
+/* The value used in the PSW register when a task first starts. */
+#define portINITIAL_PSW				( ( portSTACK_TYPE ) 0x00 )
+
+/* Macro to clear the timer 2 interrupt flag. */
+//#define portCLEAR_INTERRUPT_FLAG()	TMR2CN &= ~0x80;
+#define portCLEAR_INTERRUPT_FLAG()
+
+/* Used during a context switch to store the size of the stack being copied
+to or from XRAM. */
+//static unsigned char ucStackBytes;
+
+/* Used during a context switch to point to the next byte in XRAM from/to which
+a RAM byte is to be copied. */
+//static portSTACK_TYPE *pxXRAMStack;
+
+/* Used during a context switch to point to the next byte in RAM from/to which
+an XRAM byte is to be copied. */
+//static portSTACK_TYPE *pxRAMStack;
 
 /* We require the address of the pxCurrentTCB variable, but don't want to know
 any details of its type. */
 typedef void tskTCB;
 extern volatile tskTCB * volatile pxCurrentTCB;
 
+/*
+ * Setup the hardware to generate an interrupt off timer 2 at the required 
+ * frequency.
+ */
+static void prvSetupTimerInterrupt( void );
+
 /*-----------------------------------------------------------*/
-
-/* 
- * Macro to save all the general purpose registers, the save the stack pointer
- * into the TCB.  
- * 
- * The first thing we do is save the flags then disable interrupts.  This is to 
- * guard our stack against having a context switch interrupt after we have already 
- * pushed the registers onto the stack - causing the 32 registers to be on the 
- * stack twice. 
- * 
- * r1 is set to zero as the compiler expects it to be thus, however some
- * of the math routines make use of R1. 
- * 
- * The interrupts will have been disabled during the call to portSAVE_CONTEXT()
- * so we need not worry about reading/writing to the stack pointer. 
+/*
+ * Macro that copies the current stack from internal RAM to XRAM.  This is 
+ * required as the 8051 only contains enough internal RAM for a single stack, 
+ * but we have a stack for every task.
  */
-
-// P001 : FreeRTOS porting
-// By Ricardo
 #if 0
-#define portSAVE_CONTEXT()									\
-	asm volatile (	"push	r0						\n\t"	\
-					"in		r0, __SREG__			\n\t"	\
-					"cli							\n\t"	\
-					"push	r0						\n\t"	\
-					"push	r1						\n\t"	\
-					"clr	r1						\n\t"	\
-					"push	r2						\n\t"	\
-					"push	r3						\n\t"	\
-					"push	r4						\n\t"	\
-					"push	r5						\n\t"	\
-					"push	r6						\n\t"	\
-					"push	r7						\n\t"	\
-					"push	r8						\n\t"	\
-					"push	r9						\n\t"	\
-					"push	r10						\n\t"	\
-					"push	r11						\n\t"	\
-					"push	r12						\n\t"	\
-					"push	r13						\n\t"	\
-					"push	r14						\n\t"	\
-					"push	r15						\n\t"	\
-					"push	r16						\n\t"	\
-					"push	r17						\n\t"	\
-					"push	r18						\n\t"	\
-					"push	r19						\n\t"	\
-					"push	r20						\n\t"	\
-					"push	r21						\n\t"	\
-					"push	r22						\n\t"	\
-					"push	r23						\n\t"	\
-					"push	r24						\n\t"	\
-					"push	r25						\n\t"	\
-					"push	r26						\n\t"	\
-					"push	r27						\n\t"	\
-					"push	r28						\n\t"	\
-					"push	r29						\n\t"	\
-					"push	r30						\n\t"	\
-					"push	r31						\n\t"	\
-					"lds	r26, pxCurrentTCB		\n\t"	\
-					"lds	r27, pxCurrentTCB + 1	\n\t"	\
-					"in		r0, 0x3d				\n\t"	\
-					"st		x+, r0					\n\t"	\
-					"in		r0, 0x3e				\n\t"	\
-					"st		x+, r0					\n\t"	\
-				);
+#define portCOPY_STACK_TO_XRAM()																\
+{																								\
+	/* pxCurrentTCB points to a TCB which itself points to the location into					\
+	which the first	stack byte should be copied.  Set pxXRAMStack to point						\
+	to the location into which the first stack byte is to be copied. */							\
+	pxXRAMStack = ( portSTACK_TYPE * ) *( ( portSTACK_TYPE ** ) pxCurrentTCB );		\
+																								\
+	/* Set pxRAMStack to point to the first byte to be coped from the stack. */					\
+	pxRAMStack = ( portSTACK_TYPE * data ) configSTACK_START;								\
+																								\
+	/* Calculate the size of the stack we are about to copy from the current					\
+	stack pointer value. */																		\
+	ucStackBytes = SP - ( configSTACK_START - 1 );												\
+																								\
+	/* Before starting to copy the stack, store the calculated stack size so					\
+	the stack can be restored when the task is resumed. */										\
+	*pxXRAMStack = ucStackBytes;																\
+																								\
+	/* Copy each stack byte in turn.  pxXRAMStack is incremented first as we					\
+	have already stored the stack size into XRAM. */											\
+	while( ucStackBytes )																		\
+	{																							\
+		pxXRAMStack++;																			\
+		*pxXRAMStack = *pxRAMStack;																\
+		pxRAMStack++;																			\
+		ucStackBytes--;																			\
+	}																							\
+}
 #else
-#define portSAVE_CONTEXT()
+#define portCOPY_STACK_TO_XRAM()
 #endif
-// P001 END
-
-/* 
- * Opposite to portSAVE_CONTEXT().  Interrupts will have been disabled during
- * the context save so we can write to the stack pointer. 
- */
-
-// P001 : FreeRTOS porting
-// By Ricardo
-#if 0
-#define portRESTORE_CONTEXT()								\
-	asm volatile (	"lds	r26, pxCurrentTCB		\n\t"	\
-					"lds	r27, pxCurrentTCB + 1	\n\t"	\
-					"ld		r28, x+					\n\t"	\
-					"out	__SP_L__, r28			\n\t"	\
-					"ld		r29, x+					\n\t"	\
-					"out	__SP_H__, r29			\n\t"	\
-					"pop	r31						\n\t"	\
-					"pop	r30						\n\t"	\
-					"pop	r29						\n\t"	\
-					"pop	r28						\n\t"	\
-					"pop	r27						\n\t"	\
-					"pop	r26						\n\t"	\
-					"pop	r25						\n\t"	\
-					"pop	r24						\n\t"	\
-					"pop	r23						\n\t"	\
-					"pop	r22						\n\t"	\
-					"pop	r21						\n\t"	\
-					"pop	r20						\n\t"	\
-					"pop	r19						\n\t"	\
-					"pop	r18						\n\t"	\
-					"pop	r17						\n\t"	\
-					"pop	r16						\n\t"	\
-					"pop	r15						\n\t"	\
-					"pop	r14						\n\t"	\
-					"pop	r13						\n\t"	\
-					"pop	r12						\n\t"	\
-					"pop	r11						\n\t"	\
-					"pop	r10						\n\t"	\
-					"pop	r9						\n\t"	\
-					"pop	r8						\n\t"	\
-					"pop	r7						\n\t"	\
-					"pop	r6						\n\t"	\
-					"pop	r5						\n\t"	\
-					"pop	r4						\n\t"	\
-					"pop	r3						\n\t"	\
-					"pop	r2						\n\t"	\
-					"pop	r1						\n\t"	\
-					"pop	r0						\n\t"	\
-					"out	__SREG__, r0			\n\t"	\
-					"pop	r0						\n\t"	\
-				);
-#else
-#define portRESTORE_CONTEXT()
-#endif
-// P001 END
-
 /*-----------------------------------------------------------*/
 
 /*
- * Perform hardware setup to enable ticks from timer 1, compare match A.
+ * Macro that copies the stack of the task being resumed from XRAM into 
+ * internal RAM.
  */
-static void prvSetupTimerInterrupt( void );
+#if 0
+#define portCOPY_XRAM_TO_STACK()																\
+{																								\
+	/* Setup the pointers as per portCOPY_STACK_TO_XRAM(), but this time to						\
+	copy the data back out of XRAM and into the stack. */										\
+	pxXRAMStack = ( portSTACK_TYPE * ) *( ( portSTACK_TYPE ** ) pxCurrentTCB );		\
+	pxRAMStack = (  portSTACK_TYPE * ) ( configSTACK_START - 1 );						\
+																								\
+	/* The first value stored in XRAM was the size of the stack - i.e. the						\
+	number of bytes we need to copy back. */													\
+	ucStackBytes = pxXRAMStack[ 0 ];															\
+																								\
+	/* Copy the required number of bytes back into the stack. */								\
+	do																							\
+	{																							\
+		pxXRAMStack++;																			\
+		pxRAMStack++;																			\
+		*pxRAMStack = *pxXRAMStack;																\
+		ucStackBytes--;																			\
+	} while( ucStackBytes );																	\
+																								\
+	/* Restore the stack pointer ready to use the restored stack. */							\
+	SP = ( unsigned char ) pxRAMStack;														\
+}
+#else
+#define portCOPY_XRAM_TO_STACK()
+#endif
+/*-----------------------------------------------------------*/
+
+/*
+ * Macro to push the current execution context onto the stack, before the stack 
+ * is moved to XRAM. 
+ */
+#if 0
+#define portSAVE_CONTEXT()																		\
+{																								\
+	_asm																						\
+		/* Push ACC first, as when restoring the context it must be restored					\
+		last (it is used to set the IE register). */											\
+		push	ACC																				\
+		/* Store the IE register then disable interrupts. */									\
+		push	IE																				\
+		clr		_EA																				\
+		push	DPL																				\
+		push	DPH																				\
+		push	b																				\
+		push	ar2																				\
+		push	ar3																				\
+		push	ar4																				\
+		push	ar5																				\
+		push	ar6																				\
+		push	ar7																				\
+		push	ar0																				\
+		push	ar1																				\
+		push	PSW																				\
+	_endasm;																					\
+		PSW = 0;																				\
+	_asm																						\
+		push	_bp																				\
+	_endasm;																					\
+}
+#else
+#define portSAVE_CONTEXT()
+#endif
+/*-----------------------------------------------------------*/
+
+/*
+ * Macro that restores the execution context from the stack.  The execution 
+ * context was saved into the stack before the stack was copied into XRAM.
+ */
+#if 0
+#define portRESTORE_CONTEXT()																	\
+{																								\
+	_asm																						\
+		pop		_bp																				\
+		pop		PSW																				\
+		pop		ar1																				\
+		pop		ar0																				\
+		pop		ar7																				\
+		pop		ar6																				\
+		pop		ar5																				\
+		pop		ar4																				\
+		pop		ar3																				\
+		pop		ar2																				\
+		pop		b																				\
+		pop		DPH																				\
+		pop		DPL																				\
+		/* The next byte of the stack is the IE register.  Only the global						\
+		enable bit forms part of the task context.  Pop off the IE then set						\
+		the global enable bit to match that of the stored IE register. */						\
+		pop		ACC																				\
+		JB		ACC.7,0098$																		\
+		CLR		IE.7																			\
+		LJMP	0099$																			\
+	0098$:																						\
+		SETB	IE.7																			\
+	0099$:																						\
+		/* Finally pop off the ACC, which was the first register saved. */						\
+		pop		ACC																				\
+		reti																					\
+	_endasm;																					\
+}
+#else
+#define portRESTORE_CONTEXT()
+
+#endif
 /*-----------------------------------------------------------*/
 
 /* 
@@ -234,140 +258,112 @@ static void prvSetupTimerInterrupt( void );
  */
 portSTACK_TYPE *pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE pxCode, void *pvParameters )
 {
-unsigned short usAddress;
+unsigned long ulAddress;
+portSTACK_TYPE *pxStartOfStack;
+
+	/* Leave space to write the size of the stack as the first byte. */
+	pxStartOfStack = pxTopOfStack;
+	pxTopOfStack++;
 
 	/* Place a few bytes of known values on the bottom of the stack. 
-	This is just useful for debugging. */
-
+	This is just useful for debugging and can be uncommented if required.
 	*pxTopOfStack = 0x11;
-	pxTopOfStack--;
+	pxTopOfStack++;
 	*pxTopOfStack = 0x22;
-	pxTopOfStack--;
+	pxTopOfStack++;
 	*pxTopOfStack = 0x33;
-	pxTopOfStack--;
+	pxTopOfStack++;
+	*/
 
-	/* Simulate how the stack would look after a call to vPortYield() generated by 
-	the compiler. */
+	/* Simulate how the stack would look after a call to the scheduler tick 
+	ISR. 
 
-	/*lint -e950 -e611 -e923 Lint doesn't like this much - but nothing I can do about it. */
+	The return address that would have been pushed by the MCU. */
+	//ulAddress = ( unsigned long ) pxCode;
+	*pxTopOfStack = ( portSTACK_TYPE ) ulAddress;
+	ulAddress >>= 8;
+	pxTopOfStack++;
+	*pxTopOfStack = ( portSTACK_TYPE ) ( ulAddress );
+	pxTopOfStack++;
 
-	/* The start of the task code will be popped off the stack last, so place
-	it on first. */
-	usAddress = ( unsigned short ) pxCode;
-	*pxTopOfStack = ( portSTACK_TYPE ) ( usAddress & ( unsigned short ) 0x00ff );
-	pxTopOfStack--;
+	/* Next all the registers will have been pushed by portSAVE_CONTEXT(). */
+	*pxTopOfStack = 0xaa;	/* acc */
+	pxTopOfStack++;	
 
-	usAddress >>= 8;
-	*pxTopOfStack = ( portSTACK_TYPE ) ( usAddress & ( unsigned short ) 0x00ff );
-	pxTopOfStack--;
+	/* We want tasks to start with interrupts enabled. */
+	*pxTopOfStack = portGLOBAL_INTERRUPT_BIT;
+	pxTopOfStack++;
 
-	/* Next simulate the stack as if after a call to portSAVE_CONTEXT().  
-	portSAVE_CONTEXT places the flags on the stack immediately after r0
-	to ensure the interrupts get disabled as soon as possible, and so ensuring
-	the stack use is minimal should a context switch interrupt occur. */
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x00;	/* R0 */
-	pxTopOfStack--;
-	*pxTopOfStack = portFLAGS_INT_ENABLED;
-	pxTopOfStack--;
+	/* The function parameters will be passed in the DPTR and B register as
+	a three byte generic pointer is used. */
+	//ulAddress = ( unsigned long ) pvParameters;
+	*pxTopOfStack = ( portSTACK_TYPE ) ulAddress;	/* DPL */
+	//ulAddress >>= 8;
+	//*pxTopOfStack++;
+	*pxTopOfStack = ( portSTACK_TYPE ) ulAddress;	/* DPH */
+	ulAddress >>= 8;
+	pxTopOfStack++;
+	*pxTopOfStack = ( portSTACK_TYPE ) ulAddress;	/* b */
+	pxTopOfStack++;
 
+	/* The remaining registers are straight forward. */
+	*pxTopOfStack = 0x02;	/* R2 */
+	pxTopOfStack++;
+	*pxTopOfStack = 0x03;	/* R3 */
+	pxTopOfStack++;
+	*pxTopOfStack = 0x04;	/* R4 */
+	pxTopOfStack++;
+	*pxTopOfStack = 0x05;	/* R5 */
+	pxTopOfStack++;
+	*pxTopOfStack = 0x06;	/* R6 */
+	pxTopOfStack++;
+	*pxTopOfStack = 0x07;	/* R7 */
+	pxTopOfStack++;
+	*pxTopOfStack = 0x00;	/* R0 */
+	pxTopOfStack++;
+	*pxTopOfStack = 0x01;	/* R1 */
+	pxTopOfStack++;
+	*pxTopOfStack = 0x00;	/* PSW */
+	pxTopOfStack++;
+	*pxTopOfStack = 0xbb;	/* BP */
 
-	/* Now the remaining registers.   The compiler expects R1 to be 0. */
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x00;	/* R1 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x02;	/* R2 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x03;	/* R3 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x04;	/* R4 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x05;	/* R5 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x06;	/* R6 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x07;	/* R7 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x08;	/* R8 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x09;	/* R9 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x10;	/* R10 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x11;	/* R11 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x12;	/* R12 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x13;	/* R13 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x14;	/* R14 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x15;	/* R15 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x16;	/* R16 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x17;	/* R17 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x18;	/* R18 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x19;	/* R19 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x20;	/* R20 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x21;	/* R21 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x22;	/* R22 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x23;	/* R23 */
-	pxTopOfStack--;
+	/* Dont increment the stack size here as we don't want to include
+	the stack size byte as part of the stack size count.
 
-	/* Place the parameter on the stack in the expected location. */
-	usAddress = ( unsigned short ) pvParameters;
-	*pxTopOfStack = ( portSTACK_TYPE ) ( usAddress & ( unsigned short ) 0x00ff );
-	pxTopOfStack--;
+	Finally we place the stack size at the beginning. */
+	*pxStartOfStack = ( portSTACK_TYPE ) ( pxTopOfStack - pxStartOfStack );
 
-	usAddress >>= 8;
-	*pxTopOfStack = ( portSTACK_TYPE ) ( usAddress & ( unsigned short ) 0x00ff );
-	pxTopOfStack--;
-
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x26;	/* R26 X */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x27;	/* R27 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x28;	/* R28 Y */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x29;	/* R29 */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x30;	/* R30 Z */
-	pxTopOfStack--;
-	*pxTopOfStack = ( portSTACK_TYPE ) 0x031;	/* R31 */
-	pxTopOfStack--;
-
-	/*lint +e950 +e611 +e923 */
-
-	return pxTopOfStack;
+	/* Unlike most ports, we return the start of the stack as this is where the
+	size of the stack is stored. */
+	return pxStartOfStack;
 }
 /*-----------------------------------------------------------*/
 
+/* 
+ * See header file for description. 
+ */
 portBASE_TYPE xPortStartScheduler( void )
 {
-	/* Setup the hardware to generate the tick. */
-	prvSetupTimerInterrupt();
+	/* Setup timer 2 to generate the RTOS tick. */
+	prvSetupTimerInterrupt();	
 
-	/* Restore the context of the first task that is going to run. */
+	/* Make sure we start with the expected SFR page.  This line should not
+	really be required. */
+	//SFRPAGE = 0;
+
+	/* Copy the stack for the first task to execute from XRAM into the stack,
+	restore the task context from the new stack, then start running the task. */
+	portCOPY_XRAM_TO_STACK();
 	portRESTORE_CONTEXT();
 
-	/* Simulate a function call end as generated by the compiler.  We will now
-	jump to the start of the task the context of which we have just restored. */
-	//asm volatile ( "ret" );
-
-	/* Should not get here. */
+	/* Should never get here! */
 	return pdTRUE;
 }
 /*-----------------------------------------------------------*/
 
 void vPortEndScheduler( void )
 {
-	/* It is unlikely that the AVR port will get stopped.  If required simply
-	disable the tick interrupt here. */
+	/* Not implemented for this port. */
 }
 /*-----------------------------------------------------------*/
 
@@ -375,113 +371,96 @@ void vPortEndScheduler( void )
  * Manual context switch.  The first thing we do is save the registers so we
  * can use a naked attribute.
  */
-
-// P001 : FreeRTOS porting
-// By Ricardo
-#if 0
-void vPortYield( void ) __attribute__ ( ( naked ) );
-#endif
-// P001 END
-
 void vPortYield( void )
 {
+	/* Save the execution context onto the stack, then copy the entire stack
+	to XRAM.  This is necessary as the internal RAM is only large enough to
+	hold one stack, and we want one per task. 
+	
+	PERFORMANCE COULD BE IMPROVED BY ONLY COPYING TO XRAM IF A TASK SWITCH
+	IS REQUIRED. */
 	portSAVE_CONTEXT();
+	portCOPY_STACK_TO_XRAM();
+
+	/* Call the standard scheduler context switch function. */
 	vTaskSwitchContext();
+
+	/* Copy the stack of the task about to execute from XRAM into RAM and
+	restore it's context ready to run on exiting. */
+	portCOPY_XRAM_TO_STACK();
 	portRESTORE_CONTEXT();
-
-	//asm volatile ( "ret" );
-}
-/*-----------------------------------------------------------*/
-
-/*
- * Context switch function used by the tick.  This must be identical to 
- * vPortYield() from the call to vTaskSwitchContext() onwards.  The only
- * difference from vPortYield() is the tick count is incremented as the
- * call comes from the tick ISR.
- */
-//void vPortYieldFromTick( void ) __attribute__ ( ( naked ) );
-void vPortYieldFromTick( void )
-{
-	portSAVE_CONTEXT();
-	vTaskIncrementTick();
-	vTaskSwitchContext();
-	portRESTORE_CONTEXT();
-
-	//asm volatile ( "ret" );
-}
-/*-----------------------------------------------------------*/
-
-/*
- * Setup timer 1 compare match A to generate a tick interrupt.
- */
-static void prvSetupTimerInterrupt( void )
-{
-
-// P001 : FreeRTOS porting
-// By Ricardo
-#if 0
-unsigned long ulCompareMatch;
-unsigned char ucHighByte, ucLowByte;
-
-	/* Using 16bit timer 1 to generate the tick.  Correct fuses must be
-	selected for the configCPU_CLOCK_HZ clock. */
-
-	ulCompareMatch = configCPU_CLOCK_HZ / configTICK_RATE_HZ;
-
-	/* We only have 16 bits so have to scale to get our required tick rate. */
-	ulCompareMatch /= portCLOCK_PRESCALER;
-
-	/* Adjust for correct value. */
-	ulCompareMatch -= ( unsigned long ) 1;
-
-	/* Setup compare match value for compare match A.  Interrupts are disabled 
-	before this is called so we need not worry here. */
-	ucLowByte = ( unsigned char ) ( ulCompareMatch & ( unsigned long ) 0xff );
-	ulCompareMatch >>= 8;
-	ucHighByte = ( unsigned char ) ( ulCompareMatch & ( unsigned long ) 0xff );
-	OCR1AH = ucHighByte;
-	OCR1AL = ucLowByte;
-
-	/* Setup clock source and compare match behaviour. */
-	ucLowByte = portCLEAR_COUNTER_ON_MATCH | portPRESCALE_64;
-	TCCR1B = ucLowByte;
-
-	/* Enable the interrupt - this is okay as interrupt are currently globally
-	disabled. */
-	ucLowByte = TIMSK;
-	ucLowByte |= portCOMPARE_MATCH_A_INTERRUPT_ENABLE;
-	TIMSK = ucLowByte;
-#endif
-// P001 END
 }
 /*-----------------------------------------------------------*/
 
 #if configUSE_PREEMPTION == 1
-
-	/*
-	 * Tick ISR for preemptive scheduler.  We can use a naked attribute as
-	 * the context is saved at the start of vPortYieldFromTick().  The tick
-	 * count is incremented after the context is saved.
-	 */
-	//void SIG_OUTPUT_COMPARE1A( void ) __attribute__ ( ( signal, naked ) );
-	void SIG_OUTPUT_COMPARE1A( void )
+	void vTimer2ISR( void )
 	{
-		vPortYieldFromTick();
-		//asm volatile ( "reti" );
+		/* Preemptive context switch function triggered by the timer 2 ISR.
+		This does the same as vPortYield() (see above) with the addition
+		of incrementing the RTOS tick count. */
+
+		portSAVE_CONTEXT();
+		portCOPY_STACK_TO_XRAM();
+
+		vTaskIncrementTick();
+		vTaskSwitchContext();
+		
+		portCLEAR_INTERRUPT_FLAG();
+		portCOPY_XRAM_TO_STACK();
+		portRESTORE_CONTEXT();
 	}
 #else
-
-	/*
-	 * Tick ISR for the cooperative scheduler.  All this does is increment the
-	 * tick count.  We don't need to switch context, this can only be done by
-	 * manual calls to taskYIELD();
-	 */
-	void SIG_OUTPUT_COMPARE1A( void ) __attribute__ ( ( signal ) );
-	void SIG_OUTPUT_COMPARE1A( void )
+	void vTimer2ISR( void ) interrupt 5
 	{
+		/* When using the cooperative scheduler the timer 2 ISR is only 
+		required to increment the RTOS tick count. */
+
 		vTaskIncrementTick();
+		portCLEAR_INTERRUPT_FLAG();
 	}
 #endif
+/*-----------------------------------------------------------*/
+
+static void prvSetupTimerInterrupt( void )
+{
+//unsigned char ucOriginalSFRPage;
+
+/* Constants calculated to give the required timer capture values. */
+//const unsigned long ulTicksPerSecond = configCPU_CLOCK_HZ / portCLOCK_DIVISOR;
+//const unsigned long ulCaptureTime = ulTicksPerSecond / configTICK_RATE_HZ;
+//const unsigned long ulCaptureValue = portMAX_TIMER_VALUE - ulCaptureTime;
+//const unsigned char ucLowCaptureByte = ( unsigned char ) ( ulCaptureValue & ( unsigned long ) 0xff );
+//const unsigned char ucHighCaptureByte = ( unsigned char ) ( ulCaptureValue >> ( unsigned long ) 8 );
+
+	/* NOTE:  This uses a timer only present on 8052 architecture. */
+
+	/* Remember the current SFR page so we can restore it at the end of the
+	function. */
+	//ucOriginalSFRPage = SFRPAGE;
+	//SFRPAGE = 0;
+
+	/* TMR2CF can be left in its default state. */	
+	//TMR2CF = ( unsigned char ) 0;
+
+	/* Setup the overflow reload value. */
+	//RCAP2L = ucLowCaptureByte;
+	//RCAP2H = ucHighCaptureByte;
+
+	/* The initial load is performed manually. */
+	//TMR2L = ucLowCaptureByte;
+	//TMR2H = ucHighCaptureByte;
+
+	/* Enable the timer 2 interrupts. */
+	//IE |= portTIMER_2_INTERRUPT_ENABLE;
+
+	/* Interrupts are disabled when this is called so the timer can be started
+	here. */
+	//TMR2CN = portENABLE_TIMER;
+
+	/* Restore the original SFR page. */
+	//SFRPAGE = ucOriginalSFRPage;
+}
 
 
-	
+
+

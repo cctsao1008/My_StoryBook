@@ -51,97 +51,63 @@
     licensing and training services.
 */
 
-#ifndef PORTMACRO_H
-#define PORTMACRO_H
-#include <string.h>
+#ifndef FREERTOS_CONFIG_H
+#define FREERTOS_CONFIG_H
 
-
-#if configUSE_PREEMPTION == 0
-	void vTimer2ISR( void )
-#else
-	void vTimer2ISR( void );
+// P001 : FreeRTOS porting
+// By Ricardo
+#if 0
+#include "c8051f120.h"
 #endif
+// P001 END
 
-void vSerialISR( void );
-
+/* THE VALUE FOR configSTACK_START MUST BE OBTAINED FROM THE .MEM FILE. */
+#define configSTACK_START			( 0x0e )
 
 /*-----------------------------------------------------------
- * Port specific definitions.  
+ * Application specific definitions.
  *
- * The settings in this file configure FreeRTOS correctly for the
- * given hardware and compiler.
+ * These definitions should be adjusted for your particular hardware and
+ * application requirements.
  *
- * These settings should not be altered.
- *-----------------------------------------------------------
- */
+ * THESE PARAMETERS ARE DESCRIBED WITHIN THE 'CONFIGURATION' SECTION OF THE
+ * FreeRTOS API DOCUMENTATION AVAILABLE ON THE FreeRTOS.org WEB SITE. 
+ *
+ * See http://www.freertos.org/a00110.html.
+ *----------------------------------------------------------*/
 
-/* Type definitions. */
-#define portCHAR		char
-#define portFLOAT		float
-#define portDOUBLE		float
-#define portLONG		long
-#define portSHORT		short
-#define portSTACK_TYPE	unsigned portCHAR
-#define portBASE_TYPE	char
+#define configUSE_PREEMPTION		1
+#define configUSE_IDLE_HOOK			0
+#define configUSE_TICK_HOOK			0
+#define configCPU_CLOCK_HZ			( ( unsigned long ) 98000000 )
+#define configTICK_RATE_HZ			( ( portTickType ) 1000 )
+#define configMAX_PRIORITIES		( ( unsigned portBASE_TYPE ) 4 )
+#define configMINIMAL_STACK_SIZE	( ( unsigned short ) 200 - ( unsigned short ) configSTACK_START )
+#define configTOTAL_HEAP_SIZE		( ( size_t ) ( 6 * 1024 ) )
+#define configMAX_TASK_NAME_LEN		( 8 )
+#define configUSE_TRACE_FACILITY	0
+#define configUSE_16_BIT_TICKS		1
+#define configIDLE_SHOULD_YIELD		1
 
-#if( configUSE_16_BIT_TICKS == 1 )
-	typedef unsigned portSHORT portTickType;
-	#define portMAX_DELAY ( portTickType ) 0xffff
-#else
-	typedef unsigned portLONG portTickType;
-	#define portMAX_DELAY ( portTickType ) 0xffffffff
-#endif
-/*-----------------------------------------------------------*/	
+/* Co-routine definitions. */
+#define configUSE_CO_ROUTINES 		0
+#define configMAX_CO_ROUTINE_PRIORITIES ( 2 )
 
-/* Critical section management. */
-#if 0
-#define portENTER_CRITICAL()		_asm		\
-									push	ACC	\
-									push	IE	\
-									_endasm;	\
-									EA = 0;
+/* Set the following definitions to 1 to include the API function, or zero
+to exclude the API function. */
 
-#define portEXIT_CRITICAL()			_asm			\
-									pop		ACC		\
-									_endasm;		\
-									ACC &= 0x80;	\
-									IE |= ACC;		\
-									_asm			\
-									pop		ACC		\
-									_endasm;
-#else
-#define portENTER_CRITICAL()
-#define portEXIT_CRITICAL()	
-#endif
-
-#define portDISABLE_INTERRUPTS()	
-#define portENABLE_INTERRUPTS()		
-/*-----------------------------------------------------------*/	
-
-/* Hardware specifics. */
-#define portBYTE_ALIGNMENT			1
-#define portSTACK_GROWTH			( 1 )
-#define portTICK_RATE_MS			( ( unsigned portLONG ) 1000 / configTICK_RATE_HZ )		
-/*-----------------------------------------------------------*/	
-
-/* Task utilities. */
-void vPortYield( void );
-#define portYIELD()	vPortYield();
-/*-----------------------------------------------------------*/	
-#if 0
-#define portNOP()				_asm	\
-									nop \
-								_endasm;
-#else
-#define portNOP()
-#endif
-
-/*-----------------------------------------------------------*/	
-
-/* Task function macros as described on the FreeRTOS.org WEB site. */
-#define portTASK_FUNCTION_PROTO( vFunction, pvParameters ) void vFunction( void *pvParameters )
-#define portTASK_FUNCTION( vFunction, pvParameters ) void vFunction( void *pvParameters )
-
-#endif /* PORTMACRO_H */
+#define INCLUDE_vTaskPrioritySet		0
+#define INCLUDE_uxTaskPriorityGet		0
+#define INCLUDE_vTaskDelete				0
+#define INCLUDE_vTaskCleanUpResources	0
+#define INCLUDE_vTaskSuspend			0
+#define INCLUDE_vTaskDelayUntil			1
+#define INCLUDE_vTaskDelay				1
 
 
+
+
+
+
+
+#endif /* FREERTOS_CONFIG_H */

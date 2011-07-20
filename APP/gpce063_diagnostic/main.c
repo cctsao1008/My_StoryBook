@@ -4,7 +4,7 @@
 #include "../../FreeRTOS/source/include/croutine.h"  
 #include "../../FreeRTOS/source/include/semphr.h"
 
-void test_func(void);
+void test_func(void *pvParameters);
 
 long count = 0;
 int main()
@@ -17,7 +17,7 @@ int main()
 	return 0;
 }
 
-void test_func(void)
+void test_func(void *pvParameters)
 {
 	while(count < 100)
 	{

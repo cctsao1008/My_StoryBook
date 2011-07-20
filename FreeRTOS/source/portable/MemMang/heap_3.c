@@ -51,97 +51,67 @@
     licensing and training services.
 */
 
-#ifndef PORTMACRO_H
-#define PORTMACRO_H
-#include <string.h>
 
-
-#if configUSE_PREEMPTION == 0
-	void vTimer2ISR( void )
-#else
-	void vTimer2ISR( void );
-#endif
-
-void vSerialISR( void );
-
-
-/*-----------------------------------------------------------
- * Port specific definitions.  
+/*
+ * Implementation of pvPortMalloc() and vPortFree() that relies on the
+ * compilers own malloc() and free() implementations.
  *
- * The settings in this file configure FreeRTOS correctly for the
- * given hardware and compiler.
+ * This file can only be used if the linker is configured to to generate
+ * a heap memory area.
  *
- * These settings should not be altered.
- *-----------------------------------------------------------
+ * See heap_2.c and heap_1.c for alternative implementations, and the memory
+ * management pages of http://www.FreeRTOS.org for more information.
  */
 
-/* Type definitions. */
-#define portCHAR		char
-#define portFLOAT		float
-#define portDOUBLE		float
-#define portLONG		long
-#define portSHORT		short
-#define portSTACK_TYPE	unsigned portCHAR
-#define portBASE_TYPE	char
+#include <stdlib.h>
 
-#if( configUSE_16_BIT_TICKS == 1 )
-	typedef unsigned portSHORT portTickType;
-	#define portMAX_DELAY ( portTickType ) 0xffff
-#else
-	typedef unsigned portLONG portTickType;
-	#define portMAX_DELAY ( portTickType ) 0xffffffff
-#endif
-/*-----------------------------------------------------------*/	
+/* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
+all the API functions to use the MPU wrappers.  That should only be done when
+task.h is included from an application file. */
+#define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
-/* Critical section management. */
-#if 0
-#define portENTER_CRITICAL()		_asm		\
-									push	ACC	\
-									push	IE	\
-									_endasm;	\
-									EA = 0;
+#include "../../include/FreeRTOS.h"
+#include "../../include/task.h"
 
-#define portEXIT_CRITICAL()			_asm			\
-									pop		ACC		\
-									_endasm;		\
-									ACC &= 0x80;	\
-									IE |= ACC;		\
-									_asm			\
-									pop		ACC		\
-									_endasm;
-#else
-#define portENTER_CRITICAL()
-#define portEXIT_CRITICAL()	
-#endif
+#undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
-#define portDISABLE_INTERRUPTS()	
-#define portENABLE_INTERRUPTS()		
-/*-----------------------------------------------------------*/	
+/*-----------------------------------------------------------*/
 
-/* Hardware specifics. */
-#define portBYTE_ALIGNMENT			1
-#define portSTACK_GROWTH			( 1 )
-#define portTICK_RATE_MS			( ( unsigned portLONG ) 1000 / configTICK_RATE_HZ )		
-/*-----------------------------------------------------------*/	
+void *pvPortMalloc( size_t xWantedSize )
+{
+void *pvReturn;
 
-/* Task utilities. */
-void vPortYield( void );
-#define portYIELD()	vPortYield();
-/*-----------------------------------------------------------*/	
-#if 0
-#define portNOP()				_asm	\
-									nop \
-								_endasm;
-#else
-#define portNOP()
-#endif
+	vTaskSuspendAll();
+	{
+		pvReturn = malloc( xWantedSize );
+	}
+	xTaskResumeAll();
 
-/*-----------------------------------------------------------*/	
+	#if( configUSE_MALLOC_FAILED_HOOK == 1 )
+	{
+		if( pvReturn == NULL )
+		{
+			extern void vApplicationMallocFailedHook( void );
+			vApplicationMallocFailedHook();
+		}
+	}
+	#endif
+	
+	return pvReturn;
+}
+/*-----------------------------------------------------------*/
 
-/* Task function macros as described on the FreeRTOS.org WEB site. */
-#define portTASK_FUNCTION_PROTO( vFunction, pvParameters ) void vFunction( void *pvParameters )
-#define portTASK_FUNCTION( vFunction, pvParameters ) void vFunction( void *pvParameters )
+void vPortFree( void *pv )
+{
+	if( pv )
+	{
+		vTaskSuspendAll();
+		{
+			free( pv );
+		}
+		xTaskResumeAll();
+	}
+}
 
-#endif /* PORTMACRO_H */
 
 

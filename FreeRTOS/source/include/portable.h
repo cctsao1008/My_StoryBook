@@ -302,10 +302,7 @@
 #ifdef __IAR_78K0R_Kx3L__
 	#include "../../Source/portable/IAR/78K0R/portmacro.h"
 #endif
-
-#include "../portable/GCC/UNSP_ISA13/portmacro.h"
-
-
+	
 /* Catch all to ensure portmacro.h is included in the build.  Newer demos
 have the path as part of the project options, rather than as relative from
 the project location.  If portENTER_CRITICAL() has not been defined then
