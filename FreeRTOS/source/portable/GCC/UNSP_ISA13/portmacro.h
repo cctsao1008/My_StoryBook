@@ -110,8 +110,8 @@ void vSerialISR( void );
 									pop		ACC		\
 									_endasm;
 #else
-#define portENTER_CRITICAL()
-#define portEXIT_CRITICAL()	
+#define portENTER_CRITICAL() asm("INT OFF")
+#define portEXIT_CRITICAL()	asm("INT FIQ,IRQ")
 #endif
 
 #define portDISABLE_INTERRUPTS()	
@@ -133,7 +133,7 @@ void vPortYield( void );
 									nop \
 								_endasm;
 #else
-#define portNOP()
+#define portNOP() asm("NOP")
 #endif
 
 /*-----------------------------------------------------------*/	

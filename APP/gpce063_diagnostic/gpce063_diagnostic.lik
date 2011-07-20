@@ -1,60 +1,60 @@
 Version: 3.0
 Options: m37
 Obj: "C:\Program Files\Generalplus\unSPIDE 3.0.5\startupcode\startupD.obj"
-Obj: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\Debug\main.obj"
-Obj: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\Debug\isr.obj"
-Obj: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\Debug\Resource.obj"
-Obj: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\Debug\timers.obj"
-Obj: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\Debug\croutine.obj"
-Obj: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\Debug\list.obj"
-Obj: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\Debug\queue.obj"
-Obj: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\Debug\tasks.obj"
-Obj: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\Debug\port.obj"
-Obj: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\Debug\heap_3.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\main.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\isr.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\Resource.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\timers.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\croutine.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\list.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\queue.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\tasks.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\port.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\heap_3.obj"
+Lib: "C:\Program Files\Generalplus\unSPIDE 3.0.5\..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\Libmem.lib"
 Lib: "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\CMacro\CMacro1216.lib"
-Lib: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\CLib.lib"
-Lib: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\Libmem.lib"
-Output: "C:\sample_code\My-Story-Book\APP\gpce063_diagnostic\Debug\gpce063_diagnostic.S37"
+Lib: "C:\Program Files\Generalplus\unSPIDE 3.0.5\..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\CLib.lib"
+Output: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\gpce063_diagnostic.S37"
 ;Locate: unSP_StartUp in "startupD.obj" at 8009 
 ;Align: unSP_StartUp in "startupD.obj" with 0 
-;Locate: IRAM in "main.obj" at 9595  linkat 1 
+;Locate: IRAM in "main.obj" at 95FD  linkat 1 
 ;Align: IRAM in "main.obj" with 0 
-;Locate: IRAM in "croutine.obj" at 9597  linkat 3 
+;Locate: IRAM in "croutine.obj" at 9663  linkat 67 
 ;Align: IRAM in "croutine.obj" with 0 
-;Locate: IRAM in "tasks.obj" at 95B7  linkat 23 
+;Locate: IRAM in "tasks.obj" at 9683  linkat 87 
 ;Align: IRAM in "tasks.obj" with 0 
-;Locate: IRAM in "./memory/malloc" of "Libmem.lib"  at 95E8  linkat 54 
-;Align: IRAM in "./memory/malloc" of "Libmem.lib"  with 0 
-;Locate: IRAM in "./memory/init_heap" of "Libmem.lib"  at 95E9  linkat 55 
+;Locate: IRAM in "./memory/init_heap" of "Libmem.lib"  at 96B4  linkat B8 
 ;Align: IRAM in "./memory/init_heap" of "Libmem.lib"  with 0 
-;Locate: CODE in "main.obj" at 947A 
+;Locate: IRAM in "./memory/malloc" of "Libmem.lib"  at 96B6  linkat BA 
+;Align: IRAM in "./memory/malloc" of "Libmem.lib"  with 0 
+;Locate: CODE in "main.obj" at 941B 
 ;Align: CODE in "main.obj" with 0 
 ;Locate: test_func_ptsec in "main.obj" at 807D 
 ;Align: test_func_ptsec in "main.obj" with 0 
-;Locate: CODE in "croutine.obj" at 8DE0 
+;Locate: CODE in "croutine.obj" at 8DFD 
 ;Align: CODE in "croutine.obj" with 0 
-;Locate: CODE in "list.obj" at 9129 
+;Locate: CODE in "list.obj" at 9146 
 ;Align: CODE in "list.obj" with 0 
-;Locate: CODE in "queue.obj" at 87BD 
+;Locate: CODE in "queue.obj" at 87C4 
 ;Align: CODE in "queue.obj" with 0 
 ;Locate: CODE in "tasks.obj" at 807F 
 ;Align: CODE in "tasks.obj" with 0 
-;Locate: CODE in "port.obj" at 92D3 
+;Locate: CODE in "port.obj" at 92F0 
 ;Align: CODE in "port.obj" with 0 
-;Locate: CODE in "heap_3.obj" at 9517 
+;Locate: CODE in "heap_3.obj" at 957F 
 ;Align: CODE in "heap_3.obj" with 0 
-;Locate: CODE in "./blockcopy" of "CMacro1216.lib"  at 957F 
-;Align: CODE in "./blockcopy" of "CMacro1216.lib"  with 0 
-;Locate: CODE in "./string/memset" of "CLib.lib"  at 9562 
-;Align: CODE in "./string/memset" of "CLib.lib"  with 0 
-;Locate: CODE in "./string/strncpy" of "CLib.lib"  at 954B 
-;Align: CODE in "./string/strncpy" of "CLib.lib"  with 0 
-;Locate: CODE in "./rshu2" of "CMacro1216.lib"  at 958B 
-;Align: CODE in "./rshu2" of "CMacro1216.lib"  with 0 
-;Locate: CODE in "./memory/free" of "Libmem.lib"  at 94CC 
-;Align: CODE in "./memory/free" of "Libmem.lib"  with 0 
-;Locate: CODE in "./memory/malloc" of "Libmem.lib"  at 93FE 
-;Align: CODE in "./memory/malloc" of "Libmem.lib"  with 0 
-;Locate: CODE in "./memory/init_heap" of "Libmem.lib"  at 9572 
+;Locate: CODE in "./memory/init_heap" of "Libmem.lib"  at 95DA 
 ;Align: CODE in "./memory/init_heap" of "Libmem.lib"  with 0 
+;Locate: CODE in "./blockcopy" of "CMacro1216.lib"  at 95E7 
+;Align: CODE in "./blockcopy" of "CMacro1216.lib"  with 0 
+;Locate: CODE in "./string/memset" of "CLib.lib"  at 95CA 
+;Align: CODE in "./string/memset" of "CLib.lib"  with 0 
+;Locate: CODE in "./string/strncpy" of "CLib.lib"  at 95B3 
+;Align: CODE in "./string/strncpy" of "CLib.lib"  with 0 
+;Locate: CODE in "./rshu2" of "CMacro1216.lib"  at 95F3 
+;Align: CODE in "./rshu2" of "CMacro1216.lib"  with 0 
+;Locate: CODE in "./memory/free" of "Libmem.lib"  at 9534 
+;Align: CODE in "./memory/free" of "Libmem.lib"  with 0 
+;Locate: CODE in "./memory/malloc" of "Libmem.lib"  at 94B8 
+;Align: CODE in "./memory/malloc" of "Libmem.lib"  with 0 
 ;Locate: __sn_init_table at 8000 

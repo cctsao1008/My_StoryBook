@@ -56,7 +56,7 @@
  *----------------------------------------------------------*/
 
 /* Standard includes. */
-#include <string.h>
+
 
 /* Scheduler includes. */
 #include "../../../include/FreeRTOS.h"
@@ -258,8 +258,8 @@ static void prvSetupTimerInterrupt( void );
  */
 portSTACK_TYPE *pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE pxCode, void *pvParameters )
 {
-unsigned long ulAddress;
-portSTACK_TYPE *pxStartOfStack;
+    unsigned long ulAddress;
+    portSTACK_TYPE *pxStartOfStack;
 
 	/* Leave space to write the size of the stack as the first byte. */
 	pxStartOfStack = pxTopOfStack;
@@ -410,7 +410,7 @@ void vPortYield( void )
 		portRESTORE_CONTEXT();
 	}
 #else
-	void vTimer2ISR( void ) interrupt 5
+	void vTimer2ISR( void )
 	{
 		/* When using the cooperative scheduler the timer 2 ISR is only 
 		required to increment the RTOS tick count. */
@@ -423,14 +423,14 @@ void vPortYield( void )
 
 static void prvSetupTimerInterrupt( void )
 {
-//unsigned char ucOriginalSFRPage;
+    //unsigned char ucOriginalSFRPage;
 
-/* Constants calculated to give the required timer capture values. */
-//const unsigned long ulTicksPerSecond = configCPU_CLOCK_HZ / portCLOCK_DIVISOR;
-//const unsigned long ulCaptureTime = ulTicksPerSecond / configTICK_RATE_HZ;
-//const unsigned long ulCaptureValue = portMAX_TIMER_VALUE - ulCaptureTime;
-//const unsigned char ucLowCaptureByte = ( unsigned char ) ( ulCaptureValue & ( unsigned long ) 0xff );
-//const unsigned char ucHighCaptureByte = ( unsigned char ) ( ulCaptureValue >> ( unsigned long ) 8 );
+    /* Constants calculated to give the required timer capture values. */
+    //const unsigned long ulTicksPerSecond = configCPU_CLOCK_HZ / portCLOCK_DIVISOR;
+    //const unsigned long ulCaptureTime = ulTicksPerSecond / configTICK_RATE_HZ;
+    //const unsigned long ulCaptureValue = portMAX_TIMER_VALUE - ulCaptureTime;
+    //const unsigned char ucLowCaptureByte = ( unsigned char ) ( ulCaptureValue & ( unsigned long ) 0xff );
+    //const unsigned char ucHighCaptureByte = ( unsigned char ) ( ulCaptureValue >> ( unsigned long ) 8 );
 
 	/* NOTE:  This uses a timer only present on 8052 architecture. */
 
