@@ -65,9 +65,18 @@ all the API functions to use the MPU wrappers.  That should only be done when
 task.h is included from an application file. */
 #define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
+// P001 : FreeRTOS porting
+// By Ricardo
+#if 0
 #include "FreeRTOS.h"
 #include "task.h"
 #include "croutine.h"
+#else
+#include "include/FreeRTOS.h"
+#include "include/task.h"
+#include "include/croutine.h"
+#endif
+// P001 END
 
 #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 

@@ -59,8 +59,17 @@
 
 
 #include <stdlib.h>
+
+// P001 : FreeRTOS porting
+// By Ricardo
+#if 0
 #include "FreeRTOS.h"
 #include "list.h"
+#else
+#include "include/FreeRTOS.h"
+#include "include/list.h"
+#endif
+// P001 END
 
 /*-----------------------------------------------------------
  * PUBLIC LIST API documented in list.h

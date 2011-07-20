@@ -1,0 +1,493 @@
+#Sunplus Debeloper Project File - Name = SunplusIDE
+#Sunplus Developer Generated Build File Format Version V1.00
+#**DO NOT EDIT**
+#TARTYPE (GPCE063A_064A)Application
+CFG=Debug
+
+VER=3.0.5 
+# Begin Project
+#Name Begin GPCE063A_064A-Debug
+# Begin SubItem "gpce063_diagnostic  files"
+# Begin Group "APP"
+#PROP Default_Filter=pp;c;cxx;rc;def;r;odl;idl;hpj;bat
+USEPARAM=FALSE
+PARAM=
+EXPORT=21949232
+# Begin Source File
+SOURCE=main.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=isr.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=gpce063_diagnostic.rc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=Resource.asm
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "Head Files"
+#PROP Default_Filter=;hpp;hxx;hm;inl
+USEPARAM=FALSE
+PARAM=
+EXPORT=4950944
+# Begin Source File
+SOURCE=gpce063_diagnostic.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=Resource.inc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "External Dependencies"
+#PROP Default_Filter=co;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
+USEPARAM=FALSE
+PARAM=
+EXPORT=0
+# Begin Source File
+SOURCE=Makefile
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "BSP"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# End Group
+# Begin Group "FreeRTOS"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Group "source"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=0
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\timers.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\croutine.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\list.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\queue.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\tasks.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "portable"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=21798508
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\heap_3.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
+# End Group
+# Begin Group "External Headers"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\FreeRTOS.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\projdefs.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\portable.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\mpu_wrappers.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\task.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\queue.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\timers.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\list.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\FreeRTOSConfig.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\croutine.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\StackMacros.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\portmacro.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\semphr.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
+# End SubItem
+#Name End GPCE063A_064A-Debug
+#Name Begin GPCE063A_064A-Release
+# Begin SubItem "gpce063_diagnostic  files"
+# Begin Group "APP"
+#PROP Default_Filter=pp;c;cxx;rc;def;r;odl;idl;hpj;bat
+USEPARAM=FALSE
+PARAM=
+EXPORT=21949232
+# Begin Source File
+SOURCE=main.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=isr.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=gpce063_diagnostic.rc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=Resource.asm
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "Head Files"
+#PROP Default_Filter=;hpp;hxx;hm;inl
+USEPARAM=FALSE
+PARAM=
+EXPORT=4950944
+# Begin Source File
+SOURCE=gpce063_diagnostic.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=Resource.inc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "External Dependencies"
+#PROP Default_Filter=co;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
+USEPARAM=FALSE
+PARAM=
+EXPORT=0
+# Begin Source File
+SOURCE=Makefile
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "BSP"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# End Group
+# Begin Group "FreeRTOS"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Group "source"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=0
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\timers.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\croutine.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\list.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\queue.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\tasks.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "portable"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=21798508
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\heap_3.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
+# End Group
+# Begin Group "External Headers"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\FreeRTOS.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\projdefs.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\portable.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\mpu_wrappers.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\task.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\queue.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\timers.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\list.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\FreeRTOSConfig.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\croutine.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\StackMacros.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\portmacro.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\include\semphr.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
+# End SubItem
+#Name End GPCE063A_064A-Release
+# End Project
+#Sunplus Debeloper Project File - Name = SunplusIDE
+#Sunplus Developer Generated Build File Format Version V1.00

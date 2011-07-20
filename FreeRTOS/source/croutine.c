@@ -57,9 +57,18 @@
     licensing and training services.
 */
 
+// P001 : FreeRTOS porting
+// By Ricardo
+#if 0
 #include "FreeRTOS.h"
 #include "task.h"
 #include "croutine.h"
+#else
+#include "include/FreeRTOS.h"
+#include "include/task.h"
+#include "include/croutine.h"
+#endif
+// P001 END
 
 /*
  * Some kernel aware debuggers require data to be viewed to be global, rather

@@ -302,7 +302,10 @@
 #ifdef __IAR_78K0R_Kx3L__
 	#include "../../Source/portable/IAR/78K0R/portmacro.h"
 #endif
-	
+
+#include "../portable/GCC/UNSP_ISA13/portmacro.h"
+
+
 /* Catch all to ensure portmacro.h is included in the build.  Newer demos
 have the path as part of the project options, rather than as relative from
 the project location.  If portENTER_CRITICAL() has not been defined then
@@ -310,7 +313,14 @@ portmacro.h has not yet been included - as every portmacro.h provides a
 portENTER_CRITICAL() definition.  Check the demo application for your demo
 to find the path to the correct portmacro.h file. */
 #ifndef portENTER_CRITICAL
+    // P001 : FreeRTOS porting
+    // By Ricardo
+    #if 0
 	#include "portmacro.h"	
+	#else
+	#include "../portable/GCC/UNSP_ISA13/portmacro.h"
+	#endif
+	// P001 END
 #endif
 	
 #if portBYTE_ALIGNMENT == 8

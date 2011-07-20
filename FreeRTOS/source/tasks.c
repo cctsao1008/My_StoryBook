@@ -67,10 +67,20 @@ all the API functions to use the MPU wrappers.  That should only be done when
 task.h is included from an application file. */
 #define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
+// P001 : FreeRTOS porting
+// By Ricardo
+#if 0
 #include "FreeRTOS.h"
 #include "task.h"
 #include "timers.h"
 #include "StackMacros.h"
+#else
+#include "include/FreeRTOS.h"
+#include "include/task.h"
+#include "include/timers.h"
+#include "include/StackMacros.h"
+#endif
+// P001 END
 
 #undef MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
@@ -2202,7 +2212,7 @@ tskTCB *pxNewTCB;
 		else
 		{
 			/* Just to help debugging. */
-			memset( pxNewTCB->pxStack, tskSTACK_FILL_BYTE, usStackDepth * sizeof( portSTACK_TYPE ) );
+			//memset( pxNewTCB->pxStack, tskSTACK_FILL_BYTE, usStackDepth * sizeof( portSTACK_TYPE ) );
 		}
 	}
 

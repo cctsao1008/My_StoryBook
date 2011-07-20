@@ -76,12 +76,16 @@ extern "C" {
  */
 
 /* Type definitions. */
-#define portCHAR		char
+//#define portCHAR		char
+#define portCHAR		int
+
 #define portFLOAT		float
 #define portDOUBLE		double
 #define portLONG		long
 #define portSHORT		int
 #define portSTACK_TYPE	unsigned portCHAR
+
+
 #define portBASE_TYPE	char
 #define cbi(port,bit) (port) &= ~(1 << (bit)) 
 #define sbi(port,bit) (port) |= (1 << (bit)) 
@@ -96,6 +100,10 @@ extern "C" {
 /*-----------------------------------------------------------*/	
 
 /* Critical section management. */
+
+// P001 : FreeRTOS porting
+// By Ricardo
+#if 0
 #define portENTER_CRITICAL()		asm volatile ( "in		__tmp_reg__, __SREG__" :: );	\
 									asm volatile ( "cli" :: );								\
 									asm volatile ( "push	__tmp_reg__" :: )
@@ -105,17 +113,43 @@ extern "C" {
 
 #define portDISABLE_INTERRUPTS()	asm volatile ( "cli" :: );
 #define portENABLE_INTERRUPTS()		asm volatile ( "sei" :: );
+#else
+#define portENTER_CRITICAL()
+#define portEXIT_CRITICAL()
+#define portDISABLE_INTERRUPTS()
+#define portENABLE_INTERRUPTS()
+#endif
+// P001 END
+
 /*-----------------------------------------------------------*/
 
 /* Architecture specifics. */
 #define portSTACK_GROWTH			( -1 )
 #define portTICK_RATE_MS			( ( portTickType ) 1000 / configTICK_RATE_HZ )		
 #define portBYTE_ALIGNMENT			1
+
+// P001 : FreeRTOS porting
+// By Ricardo
+#if 0
 #define portNOP()					asm volatile ( "nop" );
+#else
+#define portNOP()
+#endif
+// P001 END
+
 /*-----------------------------------------------------------*/
 
 /* Kernel utilities. */
+
+// P001 : FreeRTOS porting
+// By Ricardo
+#if 0
 extern void vPortYield( void ) __attribute__ ( ( naked ) );
+#else
+extern void vPortYield( void );
+#endif
+// P001 END
+
 #define portYIELD()					vPortYield()
 /*-----------------------------------------------------------*/
 
