@@ -1,6 +1,6 @@
 /*
     FreeRTOS V7.0.1 - Copyright (C) 2011 Real Time Engineers Ltd.
-	
+    
 
     ***************************************************************************
      *                                                                       *
@@ -57,9 +57,9 @@
 
 
 #if configUSE_PREEMPTION == 0
-	void vTimer2ISR( void )
+    void vTimer2ISR( void )
 #else
-	void vTimer2ISR( void );
+    void vTimer2ISR( void );
 #endif
 
 void vSerialISR( void );
@@ -76,67 +76,67 @@ void vSerialISR( void );
  */
 
 /* Type definitions. */
-#define portCHAR		char
-#define portFLOAT		float
-#define portDOUBLE		float
-#define portLONG		long
-#define portSHORT		short
-#define portSTACK_TYPE	unsigned portCHAR
-#define portBASE_TYPE	char
+#define portCHAR        char
+#define portFLOAT       float
+#define portDOUBLE      float
+#define portLONG        long
+#define portSHORT       short
+#define portSTACK_TYPE  unsigned portCHAR
+#define portBASE_TYPE   char
 
 #if( configUSE_16_BIT_TICKS == 1 )
-	typedef unsigned portSHORT portTickType;
-	#define portMAX_DELAY ( portTickType ) 0xffff
+    typedef unsigned portSHORT portTickType;
+    #define portMAX_DELAY ( portTickType ) 0xffff
 #else
-	typedef unsigned portLONG portTickType;
-	#define portMAX_DELAY ( portTickType ) 0xffffffff
+    typedef unsigned portLONG portTickType;
+    #define portMAX_DELAY ( portTickType ) 0xffffffff
 #endif
-/*-----------------------------------------------------------*/	
+/*-----------------------------------------------------------*/    
 
 /* Critical section management. */
 #if 0
-#define portENTER_CRITICAL()		_asm		\
-									push	ACC	\
-									push	IE	\
-									_endasm;	\
-									EA = 0;
+#define portENTER_CRITICAL()        _asm        \
+                                    push    ACC    \
+                                    push    IE    \
+                                    _endasm;    \
+                                    EA = 0;
 
-#define portEXIT_CRITICAL()			_asm			\
-									pop		ACC		\
-									_endasm;		\
-									ACC &= 0x80;	\
-									IE |= ACC;		\
-									_asm			\
-									pop		ACC		\
-									_endasm;
+#define portEXIT_CRITICAL()            _asm            \
+                                    pop        ACC        \
+                                    _endasm;        \
+                                    ACC &= 0x80;    \
+                                    IE |= ACC;        \
+                                    _asm            \
+                                    pop        ACC        \
+                                    _endasm;
 #else
 #define portENTER_CRITICAL() asm("INT OFF")
-#define portEXIT_CRITICAL()	asm("INT FIQ,IRQ")
+#define portEXIT_CRITICAL()    asm("INT FIQ,IRQ")
 #endif
 
-#define portDISABLE_INTERRUPTS()	
-#define portENABLE_INTERRUPTS()		
-/*-----------------------------------------------------------*/	
+#define portDISABLE_INTERRUPTS() asm("INT OFF")    
+#define portENABLE_INTERRUPTS()    asm("INT FIQ,IRQ")    
+/*-----------------------------------------------------------*/    
 
 /* Hardware specifics. */
-#define portBYTE_ALIGNMENT			1
-#define portSTACK_GROWTH			( 1 )
-#define portTICK_RATE_MS			( ( unsigned portLONG ) 1000 / configTICK_RATE_HZ )		
-/*-----------------------------------------------------------*/	
+#define portBYTE_ALIGNMENT            1
+#define portSTACK_GROWTH              ( -1 ) // unsp isa13 stack form high to low : Ricardo
+#define portTICK_RATE_MS              ( ( unsigned portLONG ) 1000 / configTICK_RATE_HZ )        
+/*-----------------------------------------------------------*/    
 
 /* Task utilities. */
 void vPortYield( void );
-#define portYIELD()	vPortYield();
-/*-----------------------------------------------------------*/	
+#define portYIELD()    vPortYield();
+/*-----------------------------------------------------------*/    
 #if 0
-#define portNOP()				_asm	\
-									nop \
-								_endasm;
+#define portNOP()                _asm    \
+                                 nop     \
+                                 _endasm;
 #else
 #define portNOP() asm("NOP")
 #endif
 
-/*-----------------------------------------------------------*/	
+/*-----------------------------------------------------------*/    
 
 /* Task function macros as described on the FreeRTOS.org WEB site. */
 #define portTASK_FUNCTION_PROTO( vFunction, pvParameters ) void vFunction( void *pvParameters )
