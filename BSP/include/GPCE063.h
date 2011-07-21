@@ -114,7 +114,7 @@
 //====================================================================================
 // P_IO_Ctrl (0x2008)
 //====================================================================================
-// Bit[15:11] : Reserved 
+// Bit[15:11] : Reserved
 // Bit10 : FW_SPI_CS
 #define C_FW_SPI_CS             0x0400
 #define C_SPI_CS_Firmware       0x0000    // CS Control by Firmware
@@ -143,7 +143,7 @@
 #define C_EXT1_Normal_Falling   0x0004    // Normal IO With Falling Edge Trigger
 #define C_EXT1_Feedback_Rising  0x0008    // Feedback Oscillator With Rising Edge Trigger
 #define C_EXT1_Feedback_Falling 0x000C    // Feedback Oscillator With Falling Edge Trigger
-// Bit[1:0] : Reserved 
+// Bit[1:0] : Reserved
 
 //====================================================================================
 // P_Timer_Ctrl (0x2016)  Timer Setting
@@ -303,7 +303,7 @@
 #define C_IOPWM_1_Div_2       0x000F
 
 //====================================================================================
-// P_System_Clock (0x2030)  
+// P_System_Clock (0x2030)
 // The System Clock can be configured form 24.576MHz to 49.152MHz
 //====================================================================================
 // Bit[7:5] : FOSC
@@ -431,12 +431,12 @@
 #define C_SCKSEL_FPLL_Div_8     0x0002
 #define C_SCKSEL_FPLL_Div_16    0x0003
 #define C_SCKSEL_FPLL_Div_32    0x0004
-#define C_SCKSEL_FPLL_Div_64    0x0005  
+#define C_SCKSEL_FPLL_Div_64    0x0005
 #define C_SCKSEL_FPLL_Div_128   0x0006
 // Bit3 : Reserved
 // Bit4 : SPI Clock Polarity
 #define C_SPI_Clock_Pol           0x0010
-#define C_SPI_Clock_Pol_Normal    0x0000  // Clock Normal or Inverted 
+#define C_SPI_Clock_Pol_Normal    0x0000  // Clock Normal or Inverted
 #define C_SPI_Clock_Pol_Inverse   0x0010
 // Bit5 : SPI Clock Phase
 #define C_SPI_Clock_Phase         0x0020
@@ -462,7 +462,7 @@
 //====================================================================================
 // P_SPI_TX_Status (0x2061)
 //====================================================================================
-// Bit[3:0] : SPI TX Flag (read only) : Only 8 FIFOs  
+// Bit[3:0] : SPI TX Flag (read only) : Only 8 FIFOs
 #define C_SPI_TX_Flag           0x0007    // 0 ~ 7
 // Bit[7:4] : SPI TX level setting
 #define C_SPI_TX_FIFO_Level     0x0070    // 0 ~ 7
@@ -538,10 +538,10 @@
 #define C_ADC_Conv_Cyc_16       0x0001
 #define C_ADC_Conv_Cyc_32       0x0002
 #define C_ADC_Conv_Cyc_64       0x0003
-// Bit2 : ADC Enable 
+// Bit2 : ADC Enable
 #define C_ADC_Disable         0x0000
 #define C_ADC_Enable          0x0004
-// Bit3 : AGC Enable 
+// Bit3 : AGC Enable
 #define C_AGC_Disable         0x0000
 #define C_AGC_Enable          0x0008
 // Bit4 : A/D Input Select in Manual Mode
@@ -621,27 +621,47 @@
 typedef union tagIOBITS {
 
     unsigned int data;
-    
+
     struct {
-        
-        unsigned B0 :1;        
-        unsigned B1 :1;        
-        unsigned B2 :1;        
-        unsigned B3 :1;        
-        unsigned B4 :1;        
-        unsigned B5 :1;        
-        unsigned B6 :1;        
-        unsigned B7 :1;        
-        unsigned B8 :1;        
-        unsigned B9 :1;        
-        unsigned B10:1;        
-        unsigned B11:1;        
-        unsigned B12:1;        
-        unsigned B13:1;        
-        unsigned B14:1;        
+
+        unsigned B0 :1;
+        unsigned B1 :1;
+        unsigned B2 :1;
+        unsigned B3 :1;
+        unsigned B4 :1;
+        unsigned B5 :1;
+        unsigned B6 :1;
+        unsigned B7 :1;
+        unsigned B8 :1;
+        unsigned B9 :1;
+        unsigned B10:1;
+        unsigned B11:1;
+        unsigned B12:1;
+        unsigned B13:1;
+        unsigned B14:1;
         unsigned B15:1;
-        
+
     };
 } *IO_BITS;
+
+#ifndef sbi
+#define sbi(x,y)    x|=(1 << (y))
+#endif
+
+#ifndef cbi
+#define cbi(x,y)    x&=~(1 << (y))
+#endif
+
+#ifndef tstb
+#define tstb(x,y)    (x & (1 << (y)) ? 1 : 0)
+#endif
+
+#ifndef toggle
+#define toggle(x,y)    x^=(1 << (y))
+#endif
+
+#ifndef BIT
+#define BIT(x)    (1 << (x))
+#endif
 
 #endif __GPCE063_H__
