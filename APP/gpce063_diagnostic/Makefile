@@ -1,6 +1,6 @@
 #####################################################################
 #																	 
-#	Created by u'nSP IDE		13:14:39	07/21/11
+#	Created by u'nSP IDE		15:56:42	07/21/11
 #
 #####################################################################
 
@@ -60,9 +60,10 @@ OBJFILES	= \
 	"$(OUTDIR)\queue.obj" \
 	"$(OUTDIR)\tasks.obj" \
 	"$(OUTDIR)\heap_3.obj" \
-	"$(OUTDIR)\port_c.obj" 
+	"$(OUTDIR)\port_c.obj" \
+	"$(OUTDIR)\port_a.obj" 
 
-"$(OUTDIR)\main.asm": "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\main.c" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\FreeRTOS.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\task.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\croutine.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\semphr.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\projdefs.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\FreeRTOSConfig.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\portable.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\list.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\queue.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\portable\GCC\UNSP_ISA13\portmacro.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\mpu_wrappers.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\stddef.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\string.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\memory.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\stdlib.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\reent.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\sys\reent.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\_ansi.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\machine/_types.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\assert.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\limits.h" 
+"$(OUTDIR)\main.asm": "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\main.c" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\FreeRTOS.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\task.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\croutine.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\semphr.h" "C:\sample_code\gpce_freertos\BSP\include\GPCE063.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\projdefs.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\FreeRTOSConfig.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\portable.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\list.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\queue.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\portable\GCC\UNSP_ISA13\portmacro.h" "C:\sample_code\gpce_freertos\FreeRTOS\source\include\mpu_wrappers.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\stddef.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\string.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\memory.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\stdlib.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\reent.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\sys\reent.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\_ansi.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\machine/_types.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\assert.h" "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\include\limits.h" 
 	set PATH="$(APPDIR)\toolchain\";%PATH% & \
 	$(CC) $(CFLAGS) -o "$(OUTDIR)/main.asm" "C:/sample_code/gpce_freertos/APP/gpce063_diagnostic/main.c" 
 
@@ -128,6 +129,9 @@ OBJFILES	= \
 "$(OUTDIR)\port_c.obj": "$(OUTDIR)\port_c.asm"
 	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\port_c.obj" "$(OUTDIR)\port_c.asm" 
 
+"$(OUTDIR)\port_a.obj": "C:\sample_code\gpce_freertos\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_a.asm" "C:\sample_code\gpce_freertos\BSP\include\GPCE063.inc" 
+	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\port_a.obj" "C:\sample_code\gpce_freertos\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_a.asm" 
+
 
 .SUFFIXES : .c .asm .obj .s37 .tsk .res
 
@@ -173,6 +177,8 @@ clean :
 	$(RM) "$(OUTDIR)\port_c.obj" 
 	$(RM) "$(OUTDIR)\port_c.lst" 
 	$(RM) "$(OUTDIR)\port_c.asm" 
+	$(RM) "$(OUTDIR)\port_a.obj" 
+	$(RM) "$(OUTDIR)\port_a.lst" 
 	$(RM) $(BINFILE) $(SBMFILE) 
 
 .c.asm:

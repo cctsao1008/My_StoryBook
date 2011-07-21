@@ -75,10 +75,10 @@ task.h is included from an application file. */
 #include "timers.h"
 #include "StackMacros.h"
 #else
-#include "include/FreeRTOS.h"
-#include "include/task.h"
-#include "include/timers.h"
-#include "include/StackMacros.h"
+#include "include\FreeRTOS.h"
+#include "include\task.h"
+#include "include\timers.h"
+#include "include\StackMacros.h"
 #endif
 // P001 END
 

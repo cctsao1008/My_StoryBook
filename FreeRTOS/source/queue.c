@@ -72,9 +72,9 @@ task.h is included from an application file. */
 #include "task.h"
 #include "croutine.h"
 #else
-#include "include/FreeRTOS.h"
-#include "include/task.h"
-#include "include/croutine.h"
+#include "include\FreeRTOS.h"
+#include "include\task.h"
+#include "include\croutine.h"
 #endif
 // P001 END
 

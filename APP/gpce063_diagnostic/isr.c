@@ -1,10 +1,10 @@
 //isr.c
 
 
-
+#if 0
 void BREAK(void) __attribute__ ((ISR));
-
 void FIQ(void) __attribute__ ((ISR));
+#endif
 
 void IRQ0(void) __attribute__ ((ISR));
 
@@ -20,11 +20,12 @@ void IRQ5(void) __attribute__ ((ISR));
 
 void IRQ6(void) __attribute__ ((ISR));
 
+#if 0
 void IRQ7(void) __attribute__ ((ISR));
+#endif
 
 
-
-
+#if 0
 void BREAK(void)
 {
 	//add your code here
@@ -36,6 +37,7 @@ void FIQ(void)
 	//add your code here
 
 }
+#endif
 
 void IRQ0(void)
 {
@@ -79,8 +81,11 @@ void IRQ6(void)
 
 }
 
+#if 0
 void IRQ7(void)
 {
 	//add your code here
 
 }
+#endif
+

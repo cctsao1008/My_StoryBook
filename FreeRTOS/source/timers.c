@@ -70,10 +70,10 @@ task.h is included from an application file. */
 #include "queue.h"
 #include "timers.h"
 #else
-#include "include/FreeRTOS.h"
-#include "include/task.h"
-#include "include/queue.h"
-#include "include/timers.h"
+#include "include\FreeRTOS.h"
+#include "include\task.h"
+#include "include\queue.h"
+#include "include\timers.h"
 #endif
 // P001 END
 

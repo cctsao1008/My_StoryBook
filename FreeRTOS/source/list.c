@@ -66,8 +66,8 @@
 #include "FreeRTOS.h"
 #include "list.h"
 #else
-#include "include/FreeRTOS.h"
-#include "include/list.h"
+#include "include\FreeRTOS.h"
+#include "include\list.h"
 #endif
 // P001 END
 
