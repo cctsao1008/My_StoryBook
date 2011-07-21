@@ -8,25 +8,11 @@ VER=3.0.5
 # Begin Project
 #Name Begin GPCE063A_064A-Debug
 # Begin SubItem "gpce063_diagnostic  files"
-# Begin Group "APP"
-#PROP Default_Filter=rc;def;r;odl;idl;hpj;bat
+# Begin Group "Source Files"
+#PROP Default_Filter=;def;r;odl;idl;hpj;bat
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
-# Begin Source File
-SOURCE=main.c
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
-SOURCE=isr.c
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
 # Begin Source File
 SOURCE=gpce063_diagnostic.rc
 USEPARAM=FALSE
@@ -41,46 +27,6 @@ PARAM=
 ID=
 EXPORT=3
 # End Source File
-# End Group
-# Begin Group "Head Files"
-#PROP Default_Filter=hm;inl
-USEPARAM=FALSE
-PARAM=
-EXPORT=3
-# Begin Source File
-SOURCE=gpce063_diagnostic.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
-SOURCE=Resource.inc
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# End Group
-# Begin Group "External Dependencies"
-#PROP Default_Filter=p;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
-USEPARAM=FALSE
-PARAM=
-EXPORT=3
-# Begin Source File
-SOURCE=Makefile
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# End Group
-# Begin Group "BSP"
-#PROP Default_Filter=
-USEPARAM=FALSE
-PARAM=
-EXPORT=3
-# End Group
 # Begin Group "FreeRTOS"
 #PROP Default_Filter=
 USEPARAM=FALSE
@@ -91,13 +37,6 @@ EXPORT=3
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
-# Begin Source File
-SOURCE=..\..\FreeRTOS\source\timers.c
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\croutine.c
 USEPARAM=FALSE
@@ -126,6 +65,13 @@ PARAM=
 ID=
 EXPORT=3
 # End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\timers.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
 # End Group
 # Begin Group "portable"
 #PROP Default_Filter=
@@ -140,20 +86,112 @@ ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_c.c
+SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_a.asm
 USEPARAM=FALSE
 PARAM=
 ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_a.asm
+SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_c.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=1709004
+EXPORT=3
 # End Source File
 # End Group
+# End Group
+# Begin Group "BSP"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# End Group
+# Begin Group "APP"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Group "gpce063_diagnostic"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=isr.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=main.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "debug_led"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\debug_led\debug_led.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
+# Begin Group "ParTest"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\ParTest\ParTest.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
+# End Group
+# End Group
+# Begin Group "Head Files"
+#PROP Default_Filter=;inl
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=gpce063_diagnostic.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=Resource.inc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "External Dependencies"
+#PROP Default_Filter=dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=Makefile
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
 # End Group
 # Begin Group "External Headers"
 #PROP Default_Filter=
@@ -256,10 +294,24 @@ SOURCE=..\..\BSP\include\GPCE063.inc
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\BSP\include\GPCE063.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\ParTest\partest.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\debug_led\debug_led.h
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -270,25 +322,11 @@ EXPORT=0
 #Name End GPCE063A_064A-Debug
 #Name Begin GPCE063A_064A-Release
 # Begin SubItem "gpce063_diagnostic  files"
-# Begin Group "APP"
-#PROP Default_Filter=rc;def;r;odl;idl;hpj;bat
+# Begin Group "Source Files"
+#PROP Default_Filter=;def;r;odl;idl;hpj;bat
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
-# Begin Source File
-SOURCE=main.c
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
-SOURCE=isr.c
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
 # Begin Source File
 SOURCE=gpce063_diagnostic.rc
 USEPARAM=FALSE
@@ -303,46 +341,6 @@ PARAM=
 ID=
 EXPORT=3
 # End Source File
-# End Group
-# Begin Group "Head Files"
-#PROP Default_Filter=hm;inl
-USEPARAM=FALSE
-PARAM=
-EXPORT=3
-# Begin Source File
-SOURCE=gpce063_diagnostic.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
-SOURCE=Resource.inc
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# End Group
-# Begin Group "External Dependencies"
-#PROP Default_Filter=p;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
-USEPARAM=FALSE
-PARAM=
-EXPORT=3
-# Begin Source File
-SOURCE=Makefile
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# End Group
-# Begin Group "BSP"
-#PROP Default_Filter=
-USEPARAM=FALSE
-PARAM=
-EXPORT=3
-# End Group
 # Begin Group "FreeRTOS"
 #PROP Default_Filter=
 USEPARAM=FALSE
@@ -353,13 +351,6 @@ EXPORT=3
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
-# Begin Source File
-SOURCE=..\..\FreeRTOS\source\timers.c
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\croutine.c
 USEPARAM=FALSE
@@ -388,6 +379,13 @@ PARAM=
 ID=
 EXPORT=3
 # End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\timers.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
 # End Group
 # Begin Group "portable"
 #PROP Default_Filter=
@@ -402,20 +400,112 @@ ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_c.c
+SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_a.asm
 USEPARAM=FALSE
 PARAM=
 ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_a.asm
+SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_c.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=1709004
+EXPORT=3
 # End Source File
 # End Group
+# End Group
+# Begin Group "BSP"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# End Group
+# Begin Group "APP"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Group "gpce063_diagnostic"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=isr.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=main.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "debug_led"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\debug_led\debug_led.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
+# Begin Group "ParTest"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\ParTest\ParTest.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
+# End Group
+# End Group
+# Begin Group "Head Files"
+#PROP Default_Filter=;inl
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=gpce063_diagnostic.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=Resource.inc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# End Group
+# Begin Group "External Dependencies"
+#PROP Default_Filter=dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=Makefile
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
 # End Group
 # Begin Group "External Headers"
 #PROP Default_Filter=
@@ -518,10 +608,24 @@ SOURCE=..\..\BSP\include\GPCE063.inc
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\BSP\include\GPCE063.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\ParTest\partest.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\debug_led\debug_led.h
 USEPARAM=FALSE
 PARAM=
 ID=

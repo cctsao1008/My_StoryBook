@@ -8,12 +8,14 @@
 #include    "..\..\BSP\include\GPCE063.h"
 
 
-#define heap_size  150
+#define heap_size  400
 
 void Reset_Watchdog(void);
 int BSP_INIT(void);
 
-void test_func(void *pvParameters);
+void Task_01(void *pvParameters);
+void Task_02(void *pvParameters);
+
 
 long count = 0;
 portSTACK_TYPE stack[heap_size];
@@ -38,7 +40,8 @@ int main()
     
     init_heap((size_t)stack,sizeof(portSTACK_TYPE)*heap_size);
     
-    xTaskCreate(test_func, (signed portCHAR *)"test_func", configMINIMAL_STACK_SIZE, NULL, 10, NULL ); 
+    xTaskCreate(Task_01, (signed portCHAR *)"Task_01", configMINIMAL_STACK_SIZE, NULL, 3, NULL );
+    xTaskCreate(Task_02, (signed portCHAR *)"Task_02", configMINIMAL_STACK_SIZE, NULL, 6, NULL ); 
     
     // RunSchedular    
     vTaskStartScheduler();     
@@ -52,7 +55,17 @@ int main()
     return 0;
 }
 
-void test_func(void *pvParameters)
+void Task_01(void *pvParameters)
+{
+    while(1)
+    {
+        count++;
+        
+        vTaskDelay( 100 );
+    }
+}
+
+void Task_02(void *pvParameters)
 {
     while(1)
     {
