@@ -94,25 +94,8 @@ void vSerialISR( void );
 /*-----------------------------------------------------------*/    
 
 /* Critical section management. */
-#if 0
-#define portENTER_CRITICAL()        _asm        \
-                                    push    ACC    \
-                                    push    IE    \
-                                    _endasm;    \
-                                    EA = 0;
-
-#define portEXIT_CRITICAL()            _asm            \
-                                    pop        ACC        \
-                                    _endasm;        \
-                                    ACC &= 0x80;    \
-                                    IE |= ACC;        \
-                                    _asm            \
-                                    pop        ACC        \
-                                    _endasm;
-#else
 #define portENTER_CRITICAL() asm("INT OFF")
 #define portEXIT_CRITICAL()    asm("INT FIQ,IRQ")
-#endif
 
 #define portDISABLE_INTERRUPTS() asm("INT OFF")    
 #define portENABLE_INTERRUPTS()    asm("INT FIQ,IRQ")    
@@ -128,13 +111,7 @@ void vSerialISR( void );
 void vPortYield( void );
 #define portYIELD()    vPortYield();
 /*-----------------------------------------------------------*/    
-#if 0
-#define portNOP()                _asm    \
-                                 nop     \
-                                 _endasm;
-#else
 #define portNOP() asm("NOP")
-#endif
 
 /*-----------------------------------------------------------*/    
 

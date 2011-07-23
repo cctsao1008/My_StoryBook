@@ -1,36 +1,36 @@
 Version: 3.0
 Options: m37
 Obj: "C:\Program Files\Generalplus\unSPIDE 3.0.5\startupcode\startupD.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\Resource.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\croutine.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\list.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\queue.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\tasks.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\timers.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\heap_3.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\port_a.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\port_c.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\isr.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\main.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\debug_led.obj"
-Obj: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\ParTest.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\Resource.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\croutine.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\list.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\queue.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\tasks.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\timers.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\heap_3.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\port_a.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\port_c.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\isr.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\main.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\debug_led.obj"
+Obj: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\ParTest.obj"
 Lib: "C:\Program Files\Generalplus\unSPIDE 3.0.5\library\CMacro\CMacro1216.lib"
-Lib: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\CLib.lib"
-Lib: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\Libmem.lib"
-Output: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\gpce063_diagnostic.S37"
+Lib: "C:\Program Files\Generalplus\unSPIDE 3.0.5\..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\CLib.lib"
+Lib: "C:\Program Files\Generalplus\unSPIDE 3.0.5\..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\Libmem.lib"
+Output: "E:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\gpce063_diagnostic.S37"
 ;Locate: unSP_StartUp in "startupD.obj" at 8009 
 ;Align: unSP_StartUp in "startupD.obj" with 0 
-;Locate: IRAM in "croutine.obj" at 95F7  linkat 1 
+;Locate: IRAM in "croutine.obj" at 9600  linkat 1 
 ;Align: IRAM in "croutine.obj" with 0 
-;Locate: IRAM in "tasks.obj" at 9612  linkat 1C 
+;Locate: IRAM in "tasks.obj" at 961B  linkat 1C 
 ;Align: IRAM in "tasks.obj" with 0 
-;Locate: IRAM in "port_c.obj" at 9661  linkat 6B 
+;Locate: IRAM in "port_c.obj" at 966A  linkat 6B 
 ;Align: IRAM in "port_c.obj" with 0 
-;Locate: IRAM in "main.obj" at 9662  linkat 6C 
+;Locate: IRAM in "main.obj" at 966B  linkat 6C 
 ;Align: IRAM in "main.obj" with 0 
-;Locate: IRAM in "./memory/malloc" of "Libmem.lib"  at 97F4  linkat 1FE 
+;Locate: IRAM in "./memory/malloc" of "Libmem.lib"  at 97FD  linkat 1FE 
 ;Align: IRAM in "./memory/malloc" of "Libmem.lib"  with 0 
-;Locate: IRAM in "./memory/init_heap" of "Libmem.lib"  at 97F5  linkat 1FF 
+;Locate: IRAM in "./memory/init_heap" of "Libmem.lib"  at 97FE  linkat 1FF 
 ;Align: IRAM in "./memory/init_heap" of "Libmem.lib"  with 0 
 ;Locate: CODE in "croutine.obj" at 8E01 
 ;Align: CODE in "croutine.obj" with 0 
@@ -40,30 +40,30 @@ Output: "C:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\gpce063_diagn
 ;Align: CODE in "queue.obj" with 0 
 ;Locate: CODE in "tasks.obj" at 807E 
 ;Align: CODE in "tasks.obj" with 0 
-;Locate: CODE in "heap_3.obj" at 954B 
+;Locate: CODE in "heap_3.obj" at 9554 
 ;Align: CODE in "heap_3.obj" with 0 
-;Locate: CODE in "port_a.obj" at 95A0 
+;Locate: CODE in "port_a.obj" at 95A9 
 ;Align: CODE in "port_a.obj" with 0 
 ;Locate: CODE in "port_c.obj" at 92F8 
 ;Align: CODE in "port_c.obj" with 0 
-;Locate: CODE in "main.obj" at 93BE 
+;Locate: CODE in "main.obj" at 93C7 
 ;Align: CODE in "main.obj" with 0 
 ;Locate: Task_02_ptsec in "main.obj" at 807A 
 ;Align: Task_02_ptsec in "main.obj" with 0 
 ;Locate: Task_01_ptsec in "main.obj" at 807C 
 ;Align: Task_01_ptsec in "main.obj" with 0 
-;Locate: CODE in "ParTest.obj" at 957F 
+;Locate: CODE in "ParTest.obj" at 9588 
 ;Align: CODE in "ParTest.obj" with 0 
-;Locate: CODE in "./blockcopy" of "CMacro1216.lib"  at 95EB 
+;Locate: CODE in "./blockcopy" of "CMacro1216.lib"  at 95F4 
 ;Align: CODE in "./blockcopy" of "CMacro1216.lib"  with 0 
-;Locate: CODE in "./string/memset" of "CLib.lib"  at 95CE 
+;Locate: CODE in "./string/memset" of "CLib.lib"  at 95D7 
 ;Align: CODE in "./string/memset" of "CLib.lib"  with 0 
-;Locate: CODE in "./string/strncpy" of "CLib.lib"  at 95B7 
+;Locate: CODE in "./string/strncpy" of "CLib.lib"  at 95C0 
 ;Align: CODE in "./string/strncpy" of "CLib.lib"  with 0 
-;Locate: CODE in "./memory/free" of "Libmem.lib"  at 9500 
+;Locate: CODE in "./memory/free" of "Libmem.lib"  at 9509 
 ;Align: CODE in "./memory/free" of "Libmem.lib"  with 0 
-;Locate: CODE in "./memory/malloc" of "Libmem.lib"  at 9484 
+;Locate: CODE in "./memory/malloc" of "Libmem.lib"  at 948D 
 ;Align: CODE in "./memory/malloc" of "Libmem.lib"  with 0 
-;Locate: CODE in "./memory/init_heap" of "Libmem.lib"  at 95DE 
+;Locate: CODE in "./memory/init_heap" of "Libmem.lib"  at 95E7 
 ;Align: CODE in "./memory/init_heap" of "Libmem.lib"  with 0 
 ;Locate: __sn_init_table at 8000 

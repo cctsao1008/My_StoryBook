@@ -13,7 +13,7 @@
 PUSHALL: .MACRO
     PUSH R1,R5 TO [SP]
     .ENDM
-    
+
 POPALL: .MACRO
     POP R1,R5 FROM [SP]
     .ENDM
@@ -33,9 +33,9 @@ _vPortStartFirstTask: .PROC
 
     R1 = [_pxCurrentTCB]
     SP = [R1]
-    
+
     POPALL
-    
+
     RETI
 
 .ENDP
@@ -43,9 +43,9 @@ _vPortStartFirstTask: .PROC
 _vPortYield: .PROC
 
     PUSHFR
-    
+
     PUSHALL
-    
+
     R1 = [_pxCurrentTCB]
     [R1] = SP
 
@@ -53,9 +53,9 @@ _vPortYield: .PROC
 
     R1 = [_pxCurrentTCB]
     SP = [R1]
-    
+
     POPALL
-    
+
     RETI
 
 .ENDP
@@ -69,14 +69,14 @@ _IRQ7:
 
     R1 = C_IRQ7_64Hz
     [P_INT_Status] = R1
-    
+
     R1 = C_Watchdog_Clear
     [P_Watchdog_Clear] = R1
-    
+
     POPALL
-    
+
     RETI
-        
+
 //.endp
 
 _FIQ:
@@ -86,4 +86,3 @@ _FIQ:
 _BREAK:
 
     RETI
-    

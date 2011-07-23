@@ -1,6 +1,6 @@
 /*
     FreeRTOS V7.0.1 - Copyright (C) 2011 Real Time Engineers Ltd.
-    
+
 
     ***************************************************************************
      *                                                                       *
@@ -72,7 +72,7 @@
 static unsigned portBASE_TYPE uxCriticalNesting = 0;
 
 /*
- * Setup the hardware to generate an interrupt off timer 2 at the required 
+ * Setup the hardware to generate an interrupt off timer 2 at the required
  * frequency.
  */
 static void prvSetupTimerInterrupt( void );
@@ -81,51 +81,50 @@ static void prvSetupTimerInterrupt( void );
  * Start first task is a separate function so it can be tested in isolation.
  */
 extern void vPortStartFirstTask( void );
-extern void portSTC_CONTEXT( void );
-extern void portLDC_CONTEXT( void );
 
-/* 
- * See header file for description. 
+/*
+ * See header file for description.
  */
 portSTACK_TYPE *pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE pxCode, void *pvParameters )
 {
-    portSTACK_TYPE *stk = pxTopOfStack;
-    unsigned int *ptask = (unsigned int*)pxCode;
-    
-    /*Simulate task be interrupt status. */
-    *stk-- = (portSTACK_TYPE)pvParameters;           /* push pvParameters */
-    *stk-- = (portSTACK_TYPE)0x0000;                 /* push PC to SP */
-    *stk-- = (portSTACK_TYPE)0x0000;                 /* push SR to SP */
-    *stk-- = (portSTACK_TYPE)*(ptask+1);             /* Push PC to SP */
-    *stk-- = (portSTACK_TYPE)*(ptask+0);             /* push SR to SP */
-    
-    *stk-- = (portSTACK_TYPE)0x0008;                 /* push FR to SP */
+    //portSTACK_TYPE *stk = pxTopOfStack;
+    //unsigned int *ptask = (unsigned int*)pxCode;
 
-    *stk-- = (portSTACK_TYPE)0x5555;                 /* push R5 to sp */
-    *stk-- = (portSTACK_TYPE)0x4444;                 /* push R4 to sp */
-    *stk-- = (portSTACK_TYPE)0x3333;                 /* push R3 to sp */
-    *stk-- = (portSTACK_TYPE)0x2222;                 /* push R2 to sp */
-    *stk-- = (portSTACK_TYPE)0x1111;                 /* push R1 to sp */
-    
-    return stk;
+    /*Simulate task be interrupt status. */
+    *pxTopOfStack-- = (portSTACK_TYPE)pvParameters;           /* push pvParameters */
+    *pxTopOfStack-- = (portSTACK_TYPE)0x0000;                 /* push PC to SP */
+    *pxTopOfStack-- = (portSTACK_TYPE)0x0000;                 /* push SR to SP */
+
+    *pxTopOfStack-- = *((portSTACK_TYPE*)(pxCode+1));         /* Push PC to SP */
+    *pxTopOfStack-- = *((portSTACK_TYPE*)(pxCode+0));         /* push SR to SP */
+
+    *pxTopOfStack-- = (portSTACK_TYPE)0x0008;                 /* push FR to SP */
+
+    *pxTopOfStack-- = (portSTACK_TYPE)0x5555;                 /* push R5 to sp */
+    *pxTopOfStack-- = (portSTACK_TYPE)0x4444;                 /* push R4 to sp */
+    *pxTopOfStack-- = (portSTACK_TYPE)0x3333;                 /* push R3 to sp */
+    *pxTopOfStack-- = (portSTACK_TYPE)0x2222;                 /* push R2 to sp */
+    *pxTopOfStack-- = (portSTACK_TYPE)0x1111;                 /* push R1 to sp */
+
+    return pxTopOfStack;
 }
 
-/* 
- * See header file for description. 
+/*
+ * See header file for description.
  */
 portBASE_TYPE xPortStartScheduler( void )
 {
     /* Start the timer that generates the tick ISR.  Interrupts are disabled
-	here already. */
-	prvSetupTimerInterrupt();
-	
-	/* Initialise the critical nesting count ready for the first task. */
-	uxCriticalNesting = 0;
+    here already. */
+    prvSetupTimerInterrupt();
 
-	/* Start the first task. */
-	vPortStartFirstTask();
+    /* Initialise the critical nesting count ready for the first task. */
+    uxCriticalNesting = 0;
 
-	/* Should not get here! */
+    /* Start the first task. */
+    vPortStartFirstTask();
+
+    /* Should not get here! */
     return pdTRUE;
 }
 
@@ -137,7 +136,7 @@ void vPortEndScheduler( void )
 
 static void prvSetupTimerInterrupt( void )
 {
-    P_Watchdog_Clear = C_Watchdog_Clear;    
+    P_Watchdog_Clear = C_Watchdog_Clear;
 }
 
 void vApplicationIdleHook( void )

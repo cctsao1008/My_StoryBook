@@ -9,7 +9,7 @@ VER=3.0.5
 #Name Begin GPCE063A_064A-Debug
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=def;r;odl;idl;hpj;bat
+#PROP Default_Filter=f;r;odl;idl;hpj;bat
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -136,7 +136,7 @@ EXPORT=3
 #PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
-EXPORT=0
+EXPORT=3
 # Begin Source File
 SOURCE=..\debug_led\debug_led.c
 USEPARAM=FALSE
@@ -149,7 +149,7 @@ EXPORT=3
 #PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
-EXPORT=0
+EXPORT=3
 # Begin Source File
 SOURCE=..\ParTest\ParTest.c
 USEPARAM=FALSE
@@ -161,7 +161,7 @@ EXPORT=3
 # End Group
 # End Group
 # Begin Group "Head Files"
-#PROP Default_Filter=inl
+#PROP Default_Filter=l
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -181,7 +181,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=lg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -197,7 +197,7 @@ EXPORT=3
 #PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
-EXPORT=0
+EXPORT=3
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\FreeRTOS.h
 USEPARAM=FALSE
@@ -323,7 +323,7 @@ EXPORT=3
 #Name Begin GPCE063A_064A-Release
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=def;r;odl;idl;hpj;bat
+#PROP Default_Filter=f;r;odl;idl;hpj;bat
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -450,7 +450,7 @@ EXPORT=3
 #PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
-EXPORT=0
+EXPORT=3
 # Begin Source File
 SOURCE=..\debug_led\debug_led.c
 USEPARAM=FALSE
@@ -463,7 +463,7 @@ EXPORT=3
 #PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
-EXPORT=0
+EXPORT=3
 # Begin Source File
 SOURCE=..\ParTest\ParTest.c
 USEPARAM=FALSE
@@ -475,7 +475,7 @@ EXPORT=3
 # End Group
 # End Group
 # Begin Group "Head Files"
-#PROP Default_Filter=inl
+#PROP Default_Filter=l
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -495,7 +495,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=lg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -511,7 +511,7 @@ EXPORT=3
 #PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
-EXPORT=0
+EXPORT=3
 # Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\FreeRTOS.h
 USEPARAM=FALSE
