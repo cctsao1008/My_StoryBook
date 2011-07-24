@@ -63,10 +63,7 @@
 #include "..\..\..\include\task.h"
 
 // GPCE063A
-#include    "..\..\..\..\..\BSP\include\GPCE063.h"
-
-
-#define portCLEAR_INTERRUPT_FLAG()
+#include "..\..\..\..\..\BSP\include\GPCE063.h"
 
 /* Each task maintains its own interrupt status in the critical nesting variable. */
 static unsigned portBASE_TYPE uxCriticalNesting = 0;
@@ -95,8 +92,8 @@ portSTACK_TYPE *pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE
     *pxTopOfStack-- = (portSTACK_TYPE)0x0000;                 /* push PC to SP */
     *pxTopOfStack-- = (portSTACK_TYPE)0x0000;                 /* push SR to SP */
 
-    *pxTopOfStack-- = *((portSTACK_TYPE*)(pxCode+1));         /* Push PC to SP */
-    *pxTopOfStack-- = *((portSTACK_TYPE*)(pxCode+0));         /* push SR to SP */
+    *pxTopOfStack-- = (portSTACK_TYPE)(*((unsigned portLONG*)(pxCode+1)));         /* Push PC to SP */
+    *pxTopOfStack-- = (portSTACK_TYPE)(*((unsigned portLONG*)(pxCode+0)));         /* push SR to SP */
 
     *pxTopOfStack-- = (portSTACK_TYPE)0x0008;                 /* push FR to SP */
 

@@ -22,6 +22,8 @@ portSTACK_TYPE stack[heap_size];
 
 int main()
 {
+	unsigned int arg = 0x1234;
+
     #if 0
     count = sizeof(portSTACK_TYPE)*heap_size;
     count = sizeof(size_t); // 1 word
@@ -40,8 +42,8 @@ int main()
     
     init_heap((size_t)stack,sizeof(portSTACK_TYPE)*heap_size);
     
-    xTaskCreate(Task_01, (signed portCHAR *)"Task_01", configMINIMAL_STACK_SIZE, NULL, 3, NULL );
-    xTaskCreate(Task_02, (signed portCHAR *)"Task_02", configMINIMAL_STACK_SIZE, NULL, 6, NULL ); 
+    xTaskCreate(Task_01, (signed portCHAR *)"Task_01", configMINIMAL_STACK_SIZE, (void*)&arg, 3, NULL );
+    xTaskCreate(Task_02, (signed portCHAR *)"Task_02", configMINIMAL_STACK_SIZE, (void*)&arg, 6, NULL ); 
     
     // RunSchedular    
     vTaskStartScheduler();     
@@ -56,7 +58,11 @@ int main()
 }
 
 void Task_01(void *pvParameters)
-{
+{	
+	unsigned int *x = pvParameters;
+
+    *x = *x;
+    
     while(1)
     {
         count++;
@@ -66,7 +72,7 @@ void Task_01(void *pvParameters)
 }
 
 void Task_02(void *pvParameters)
-{
+{	
     while(1)
     {
         count++;
