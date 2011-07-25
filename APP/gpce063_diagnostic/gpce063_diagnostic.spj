@@ -9,7 +9,7 @@ VER=3.0.5
 #Name Begin GPCE063A_064A-Debug
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=;odl;idl;hpj;bat
+#PROP Default_Filter=f;r;odl;idl;hpj;bat
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -161,7 +161,7 @@ EXPORT=3
 # End Group
 # End Group
 # Begin Group "Head Files"
-#PROP Default_Filter=
+#PROP Default_Filter=l
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -181,7 +181,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=2;rct;bin;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -255,13 +255,6 @@ ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\..\FreeRTOS\source\include\FreeRTOSConfig.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\croutine.h
 USEPARAM=FALSE
 PARAM=
@@ -316,6 +309,13 @@ USEPARAM=FALSE
 PARAM=
 ID=
 EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\include\FreeRTOSConfig.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
 # End Source File
 # End Group
 # End SubItem
@@ -323,7 +323,7 @@ EXPORT=3
 #Name Begin GPCE063A_064A-Release
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=;odl;idl;hpj;bat
+#PROP Default_Filter=f;r;odl;idl;hpj;bat
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -475,7 +475,7 @@ EXPORT=3
 # End Group
 # End Group
 # Begin Group "Head Files"
-#PROP Default_Filter=
+#PROP Default_Filter=l
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -495,7 +495,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=2;rct;bin;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -569,13 +569,6 @@ ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\..\FreeRTOS\source\include\FreeRTOSConfig.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\croutine.h
 USEPARAM=FALSE
 PARAM=
@@ -630,6 +623,13 @@ USEPARAM=FALSE
 PARAM=
 ID=
 EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\include\FreeRTOSConfig.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
 # End Source File
 # End Group
 # End SubItem

@@ -9,6 +9,7 @@
 
 .EXTERNAL   _pxCurrentTCB
 .EXTERNAL   _vTaskSwitchContext
+.EXTERNAL   _vTaskIncrementTick
 
 PUSHALL: .MACRO
     PUSH R1,R5 TO [SP]
@@ -23,7 +24,16 @@ PUSHFR: .MACRO
     R1 = FR
     R2 = 0x1FFF
     R1 = R1 & R2
-    PUSH R1 to [SP]
+    PUSH R1 TO [SP]
+    SECBANK OFF
+    .ENDM
+
+POPFR: .MACRO
+    SECBANK ON
+    POP R1 FROM [SP]
+    R2 = 0x1FFF
+    R1 = R1 & R2
+    FR = R1
     SECBANK OFF
     .ENDM
 
@@ -63,8 +73,7 @@ _vPortYield: .PROC
 .TEXT
 
 _IRQ7:
-//_OSTickISR: .proc
-
+    
     PUSHALL
 
     R1 = C_IRQ7_64Hz
@@ -72,12 +81,12 @@ _IRQ7:
 
     R1 = C_Watchdog_Clear
     [P_Watchdog_Clear] = R1
-
+    
+    CALL _vTaskIncrementTick
+    
     POPALL
 
     RETI
-
-//.endp
 
 _FIQ:
 

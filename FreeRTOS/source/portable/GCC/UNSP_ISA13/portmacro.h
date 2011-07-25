@@ -53,17 +53,10 @@
 
 #ifndef PORTMACRO_H
 #define PORTMACRO_H
+
 #include <string.h>
-
-
-#if configUSE_PREEMPTION == 0
-    void vTimer2ISR( void )
-#else
-    void vTimer2ISR( void );
-#endif
-
-void vSerialISR( void );
-
+#include <memory.h>
+#include <stdlib.h>
 
 /*-----------------------------------------------------------
  * Port specific definitions.  

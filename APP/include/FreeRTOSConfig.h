@@ -54,16 +54,6 @@
 #ifndef FREERTOS_CONFIG_H
 #define FREERTOS_CONFIG_H
 
-// P001 : FreeRTOS porting
-// By Ricardo
-#if 0
-#include "c8051f120.h"
-#else
-#include <string.h>
-#include <memory.h>
-#include <stdlib.h>
-#endif
-// P001 END
 
 /* THE VALUE FOR configSTACK_START MUST BE OBTAINED FROM THE .MEM FILE. */
 #define configSTACK_START                  0
@@ -80,7 +70,7 @@
  * See http://www.freertos.org/a00110.html.
  *----------------------------------------------------------*/
 
-#define configUSE_PREEMPTION                1
+#define configUSE_PREEMPTION                0
 #define configUSE_IDLE_HOOK                 1
 #define configUSE_TICK_HOOK                 1
 #define configCPU_CLOCK_HZ                  49152000 // 49.152MHz

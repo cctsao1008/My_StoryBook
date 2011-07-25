@@ -70,7 +70,7 @@
 #include "projdefs.h"
 
 /* Application specific configuration options. */
-#include "FreeRTOSConfig.h"
+#include "..\..\..\APP\include\FreeRTOSConfig.h"
 
 /* Definitions specific to the port being used. */
 #include "portable.h"

@@ -45,6 +45,8 @@ int main()
     xTaskCreate(Task_01, (signed portCHAR *)"Task_01", configMINIMAL_STACK_SIZE, (void*)&arg, 3, NULL );
     xTaskCreate(Task_02, (signed portCHAR *)"Task_02", configMINIMAL_STACK_SIZE, (void*)&arg, 6, NULL ); 
     
+    // Config Interrupt
+    P_Int_Ctrl = C_IRQ7_64Hz;
     // RunSchedular    
     vTaskStartScheduler();     
     
@@ -67,7 +69,7 @@ void Task_01(void *pvParameters)
     {
         count++;
         
-        vTaskDelay( 100 );
+        vTaskDelay( 5 );
     }
 }
 
@@ -77,7 +79,7 @@ void Task_02(void *pvParameters)
     {
         count++;
         
-        vTaskDelay( 100 );
+        vTaskDelay( 5 );
     }
 }
 
@@ -99,9 +101,9 @@ int BSP_INIT(void)
     P_IOB_Dir->data    = 0xFFFF;
     
     // Config Interrupt
-    P_Int_Ctrl = C_IRQ7_64Hz;
+    //P_Int_Ctrl = C_IRQ7_64Hz;
     
-    asm("INT FIQ,IRQ");
+    //asm("INT FIQ,IRQ");
     return 0;
 }
 

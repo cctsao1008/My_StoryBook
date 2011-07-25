@@ -95,7 +95,7 @@ portSTACK_TYPE *pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE
     *pxTopOfStack-- = (portSTACK_TYPE)(*((unsigned portLONG*)(pxCode+1)));         /* Push PC to SP */
     *pxTopOfStack-- = (portSTACK_TYPE)(*((unsigned portLONG*)(pxCode+0)));         /* push SR to SP */
 
-    *pxTopOfStack-- = (portSTACK_TYPE)0x0008;                 /* push FR to SP */
+    *pxTopOfStack-- = (portSTACK_TYPE)0x0078;                 /* push FR to SP */
 
     *pxTopOfStack-- = (portSTACK_TYPE)0x5555;                 /* push R5 to sp */
     *pxTopOfStack-- = (portSTACK_TYPE)0x4444;                 /* push R4 to sp */
@@ -139,6 +139,11 @@ static void prvSetupTimerInterrupt( void )
 void vApplicationIdleHook( void )
 {
     P_Watchdog_Clear = C_Watchdog_Clear;
+    
+    // manual to increment time tick to debug : Ricardo
+    #if 0
+    vTaskIncrementTick();
+    #endif
 }
 
 void vApplicationTickHook( void )
