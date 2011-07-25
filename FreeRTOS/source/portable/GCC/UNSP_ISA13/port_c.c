@@ -79,6 +79,9 @@ static void prvSetupTimerInterrupt( void );
  */
 extern void vPortStartFirstTask( void );
 
+extern portSTACK_TYPE xPortReadFlagRegister( void );
+
+
 /*
  * See header file for description.
  */
@@ -95,7 +98,11 @@ portSTACK_TYPE *pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE
     *pxTopOfStack-- = (portSTACK_TYPE)(*((unsigned portLONG*)(pxCode+1)));         /* Push PC to SP */
     *pxTopOfStack-- = (portSTACK_TYPE)(*((unsigned portLONG*)(pxCode+0)));         /* push SR to SP */
 
+    #if 0
     *pxTopOfStack-- = (portSTACK_TYPE)0x0078;                 /* push FR to SP */
+    #else
+    *pxTopOfStack-- = (portSTACK_TYPE)xPortReadFlagRegister();                 /* push FR to SP */
+    #endif
 
     *pxTopOfStack-- = (portSTACK_TYPE)0x5555;                 /* push R5 to sp */
     *pxTopOfStack-- = (portSTACK_TYPE)0x4444;                 /* push R4 to sp */

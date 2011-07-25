@@ -2,6 +2,7 @@
 
 .PUBLIC     _vPortStartFirstTask
 .PUBLIC     _vPortYield
+.PUBLIC     _xPortReadFlagRegister
 
 .PUBLIC     _IRQ7
 .PUBLIC     _FIQ
@@ -11,31 +12,43 @@
 .EXTERNAL   _vTaskSwitchContext
 .EXTERNAL   _vTaskIncrementTick
 
+
+
 PUSHALL: .MACRO
+
     PUSH R1,R5 TO [SP]
+    
     .ENDM
 
 POPALL: .MACRO
+
     POP R1,R5 FROM [SP]
+    
     .ENDM
 
 PUSHFR: .MACRO
+
     SECBANK ON
     R1 = FR
     R2 = 0x1FFF
     R1 = R1 & R2
     PUSH R1 TO [SP]
     SECBANK OFF
+    
     .ENDM
 
 POPFR: .MACRO
+
     SECBANK ON
     POP R1 FROM [SP]
     R2 = 0x1FFF
     R1 = R1 & R2
     FR = R1
     SECBANK OFF
+    
     .ENDM
+
+
 
 .CODE
 
@@ -70,6 +83,18 @@ _vPortYield: .PROC
 
 .ENDP
 
+_xPortReadFlagRegister: .PROC
+
+    R1 = FR
+    R2 = 0x1FFF
+    R1 = R1 & R2
+
+    RETF
+
+.ENDP
+
+
+
 .TEXT
 
 _IRQ7:
@@ -95,3 +120,4 @@ _FIQ:
 _BREAK:
 
     RETI
+
