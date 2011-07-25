@@ -108,6 +108,7 @@ _IRQ7:
     [P_Watchdog_Clear] = R1
     
     CALL _vTaskIncrementTick
+    CALL _vPortYield
     
     POPALL
 

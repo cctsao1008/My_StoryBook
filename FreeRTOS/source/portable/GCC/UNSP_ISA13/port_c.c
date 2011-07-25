@@ -141,6 +141,8 @@ void vPortEndScheduler( void )
 static void prvSetupTimerInterrupt( void )
 {
     P_Watchdog_Clear = C_Watchdog_Clear;
+    // Config Interrupt
+    P_Int_Ctrl = C_IRQ7_64Hz;
 }
 
 void vApplicationIdleHook( void )

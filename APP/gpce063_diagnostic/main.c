@@ -12,6 +12,7 @@
 
 void Reset_Watchdog(void);
 int BSP_INIT(void);
+void vToggleLED(void);
 
 void Task_01(void *pvParameters);
 void Task_02(void *pvParameters);
@@ -22,7 +23,7 @@ portSTACK_TYPE stack[heap_size];
 
 int main()
 {
-	unsigned int arg = 0x1234;
+	unsigned int arg = 100;
 
     #if 0
     count = sizeof(portSTACK_TYPE)*heap_size;
@@ -43,7 +44,7 @@ int main()
     init_heap((size_t)stack,sizeof(portSTACK_TYPE)*heap_size);
     
     xTaskCreate(Task_01, (signed portCHAR *)"Task_01", configMINIMAL_STACK_SIZE, (void*)&arg, 3, NULL );
-    //xTaskCreate(Task_02, (signed portCHAR *)"Task_02", configMINIMAL_STACK_SIZE, (void*)&arg, 6, NULL ); 
+    xTaskCreate(Task_02, (signed portCHAR *)"Task_02", configMINIMAL_STACK_SIZE, (void*)&arg, 6, NULL ); 
     
     // RunSchedular    
     vTaskStartScheduler();     
@@ -72,11 +73,24 @@ void Task_01(void *pvParameters)
 
 void Task_02(void *pvParameters)
 {	
+	#if 0
     while(1)
     {
     	vTaskDelay( 5 );
         count++;
     }
+    #else
+    unsigned int *x = pvParameters;
+    const portTickType xDelay = (*x) / portTICK_RATE_MS;
+
+    for( ;; )
+    {
+        /* Simply toggle the LED every 500ms, blocking between each toggle. */
+        vToggleLED();
+        vTaskDelay( xDelay );
+        count++;
+    }
+    #endif
 }
 
 void Reset_Watchdog(void)
@@ -97,9 +111,15 @@ int BSP_INIT(void)
     P_IOB_Dir->data    = 0xFFFF;
     
     // Config Interrupt
-    //P_Int_Ctrl = C_IRQ7_64Hz;
+    #if 0
+    P_Int_Ctrl = C_IRQ7_64Hz;
+    #endif
     
     //asm("INT FIQ,IRQ");
     return 0;
 }
 
+void vToggleLED(void)
+{
+	P_IOB_Data->data = ~(P_IOB_Data->data);
+}
