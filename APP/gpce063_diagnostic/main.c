@@ -43,10 +43,8 @@ int main()
     init_heap((size_t)stack,sizeof(portSTACK_TYPE)*heap_size);
     
     xTaskCreate(Task_01, (signed portCHAR *)"Task_01", configMINIMAL_STACK_SIZE, (void*)&arg, 3, NULL );
-    xTaskCreate(Task_02, (signed portCHAR *)"Task_02", configMINIMAL_STACK_SIZE, (void*)&arg, 6, NULL ); 
+    //xTaskCreate(Task_02, (signed portCHAR *)"Task_02", configMINIMAL_STACK_SIZE, (void*)&arg, 6, NULL ); 
     
-    // Config Interrupt
-    P_Int_Ctrl = C_IRQ7_64Hz;
     // RunSchedular    
     vTaskStartScheduler();     
     
@@ -67,9 +65,8 @@ void Task_01(void *pvParameters)
     
     while(1)
     {
+    	vTaskDelay( 5 );
         count++;
-        
-        vTaskDelay( 5 );
     }
 }
 
@@ -77,9 +74,8 @@ void Task_02(void *pvParameters)
 {	
     while(1)
     {
+    	vTaskDelay( 5 );
         count++;
-        
-        vTaskDelay( 5 );
     }
 }
 
