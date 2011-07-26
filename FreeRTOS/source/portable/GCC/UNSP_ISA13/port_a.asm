@@ -1,12 +1,22 @@
 .include    ..\..\..\..\..\BSP\include\GPCE063.inc
 
+.IFDEF      _ASM_PORT
 .PUBLIC     _vPortStartFirstTask
-.PUBLIC     _vPortYield
-.PUBLIC     _xPortReadFlagRegister
+.ENDIF
 
+.IFDEF      _ASM_PORT
+.PUBLIC     _vPortYield
+.ENDIF
+
+.PUBLIC     _xPortReadFlagRegister
+.PUBLIC     _portSAVE_CONTEXT
+.PUBLIC     _portRESTORE_CONTEXT
+
+.IFDEF      _ASM_PORT
 .PUBLIC     _IRQ7
 .PUBLIC     _FIQ
 .PUBLIC     _BREAK
+.ENDIF
 
 .EXTERNAL   _pxCurrentTCB
 .EXTERNAL   _vTaskSwitchContext
@@ -52,6 +62,7 @@ POPFR: .MACRO
 
 .CODE
 
+.IFDEF      _ASM_PORT
 _vPortStartFirstTask: .PROC
 
     R1 = [_pxCurrentTCB]
@@ -62,7 +73,9 @@ _vPortStartFirstTask: .PROC
     RETI
 
 .ENDP
+.ENDIF
 
+.IFDEF      _ASM_PORT
 _vPortYield: .PROC
 
     PUSHFR
@@ -82,6 +95,7 @@ _vPortYield: .PROC
     RETI
 
 .ENDP
+.ENDIF
 
 _xPortReadFlagRegister: .PROC
 
@@ -93,10 +107,34 @@ _xPortReadFlagRegister: .PROC
 
 .ENDP
 
+_portSAVE_CONTEXT: .PROC
+
+    PUSHFR
+
+    PUSHALL
+
+    R1 = [_pxCurrentTCB]
+    [R1] = SP
+
+.ENDP
+
+_portRESTORE_CONTEXT: .PROC
+
+    R1 = [_pxCurrentTCB]
+    SP = [R1]
+
+    POPALL
+
+    RETI
+
+.ENDP
+
+
 
 
 .TEXT
 
+.IFDEF      _ASM_PORT
 _IRQ7:
     
     PUSHALL
@@ -121,4 +159,4 @@ _FIQ:
 _BREAK:
 
     RETI
-
+.ENDIF

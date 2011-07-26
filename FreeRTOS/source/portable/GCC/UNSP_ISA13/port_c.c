@@ -77,9 +77,13 @@ static void prvSetupTimerInterrupt( void );
 /*
  * Start first task is a separate function so it can be tested in isolation.
  */
-extern void vPortStartFirstTask( void );
+void vPortStartFirstTask( void );
 
 extern portSTACK_TYPE xPortReadFlagRegister( void );
+void vPortYield( void );
+extern void portSAVE_CONTEXT( void );
+extern void portRESTORE_CONTEXT( void );
+
 
 
 /*
@@ -138,6 +142,18 @@ void vPortEndScheduler( void )
     P_Watchdog_Clear = C_Watchdog_Clear;
 }
 
+void vPortStartFirstTask( void )
+{
+    portRESTORE_CONTEXT();
+}
+
+void vPortYield( void )
+{
+    portSAVE_CONTEXT();
+    vTaskSwitchContext();
+    portRESTORE_CONTEXT();
+}
+
 static void prvSetupTimerInterrupt( void )
 {
     P_Watchdog_Clear = C_Watchdog_Clear;
@@ -160,4 +176,19 @@ void vApplicationTickHook( void )
     P_Watchdog_Clear = C_Watchdog_Clear;
 }
 
+// Interrupt
+void IRQ7(void) __attribute__ ((ISR));
+
+void IRQ7(void)
+{
+	P_Int_Status = C_IRQ7_64Hz;
+    P_Watchdog_Clear = C_Watchdog_Clear;
+    
+    vTaskIncrementTick();
+
+    #if( configUSE_PREEMPTION == 1 )
+    vPortYield();
+    #endif
+
+}
 

@@ -52,6 +52,7 @@ int main()
     // RunSchedular fail!!
     while(1)
     {
+    	P_Watchdog_Clear = C_Watchdog_Clear;
         count++;    
     }
     
@@ -66,17 +67,17 @@ void Task_01(void *pvParameters)
     
     while(1)
     {
-    	vTaskDelay( 5 );
+    	vTaskDelay( 3 );
         count++;
     }
 }
 
 void Task_02(void *pvParameters)
 {	
-	#if 0
+	#if 1
     while(1)
     {
-    	vTaskDelay( 5 );
+    	vTaskDelay( 3 );
         count++;
     }
     #else
