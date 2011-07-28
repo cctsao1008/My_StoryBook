@@ -315,7 +315,7 @@ to find the path to the correct portmacro.h file. */
     #if 0
 	#include "portmacro.h"	
 	#else
-	#include "../portable/GCC/UNSP_ISA13/portmacro.h"
+	#include "../portable/GCC/unsp_isa_v13/portmacro.h"
 	#endif
 	// P001 END
 #endif

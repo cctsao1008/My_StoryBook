@@ -9,7 +9,7 @@ VER=3.0.5
 #Name Begin GPCE063A_064A-Debug
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=odl;idl;hpj;bat
+#PROP Default_Filter=dl;idl;hpj;bat
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -79,21 +79,21 @@ USEPARAM=FALSE
 PARAM=
 EXPORT=3
 # Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\unsp_isa_v13\port_c.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\unsp_isa_v13\port_a.asm
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=7340137
+# End Source File
+# Begin Source File
 SOURCE=..\..\FreeRTOS\source\portable\MemMang\heap_3.c
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_a.asm
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_c.c
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -181,7 +181,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=;rct;bin;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=rct;bin;rgs;gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -269,21 +269,7 @@ ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\portmacro.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\semphr.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
-SOURCE=..\..\BSP\include\GPCE063.inc
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -316,6 +302,20 @@ USEPARAM=FALSE
 PARAM=
 ID=
 EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\BSP\include\GPCE063.inc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\unsp_isa_v13\portmacro.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
 # End Source File
 # End Group
 # End SubItem
@@ -323,7 +323,7 @@ EXPORT=3
 #Name Begin GPCE063A_064A-Release
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=odl;idl;hpj;bat
+#PROP Default_Filter=dl;idl;hpj;bat
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -393,21 +393,21 @@ USEPARAM=FALSE
 PARAM=
 EXPORT=3
 # Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\unsp_isa_v13\port_c.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\unsp_isa_v13\port_a.asm
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=7340137
+# End Source File
+# Begin Source File
 SOURCE=..\..\FreeRTOS\source\portable\MemMang\heap_3.c
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_a.asm
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\port_c.c
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -495,7 +495,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=;rct;bin;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=rct;bin;rgs;gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -583,21 +583,7 @@ ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\..\FreeRTOS\source\portable\GCC\UNSP_ISA13\portmacro.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
 SOURCE=..\..\FreeRTOS\source\include\semphr.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=3
-# End Source File
-# Begin Source File
-SOURCE=..\..\BSP\include\GPCE063.inc
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -630,6 +616,20 @@ USEPARAM=FALSE
 PARAM=
 ID=
 EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\..\BSP\include\GPCE063.inc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\FreeRTOS\source\portable\GCC\unsp_isa_v13\portmacro.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
 # End Source File
 # End Group
 # End SubItem

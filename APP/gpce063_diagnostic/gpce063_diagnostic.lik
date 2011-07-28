@@ -7,9 +7,9 @@ Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\list.obj"
 Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\queue.obj"
 Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\tasks.obj"
 Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\timers.obj"
-Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\heap_3.obj"
-Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\port_a.obj"
 Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\port_c.obj"
+Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\port_a.obj"
+Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\heap_3.obj"
 Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\isr.obj"
 Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\main.obj"
 Obj: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\debug_led.obj"
@@ -40,12 +40,12 @@ Output: "M:\sample_code\gpce_freertos\APP\gpce063_diagnostic\Debug\gpce063_diagn
 ;Align: CODE in "queue.obj" with 0 
 ;Locate: CODE in "tasks.obj" at 8095 
 ;Align: CODE in "tasks.obj" with 0 
-;Locate: CODE in "heap_3.obj" at 959E 
-;Align: CODE in "heap_3.obj" with 0 
-;Locate: CODE in "port_a.obj" at 960A 
-;Align: CODE in "port_a.obj" with 0 
 ;Locate: CODE in "port_c.obj" at 930F 
 ;Align: CODE in "port_c.obj" with 0 
+;Locate: CODE in "port_a.obj" at 960A 
+;Align: CODE in "port_a.obj" with 0 
+;Locate: CODE in "heap_3.obj" at 959E 
+;Align: CODE in "heap_3.obj" with 0 
 ;Locate: CODE in "main.obj" at 93FC 
 ;Align: CODE in "main.obj" with 0 
 ;Locate: Task_02_ptsec in "main.obj" at 8091 
