@@ -107,7 +107,7 @@ _xPortReadFlagRegister: .PROC
 
 .ENDP
 
-_portSAVE_CONTEXT: .PROC
+_portSAVE_CONTEXT: .MACRO
 
     PUSHFR
 
@@ -116,9 +116,9 @@ _portSAVE_CONTEXT: .PROC
     R1 = [_pxCurrentTCB]
     [R1] = SP
 
-.ENDP
+.ENDM
 
-_portRESTORE_CONTEXT: .PROC
+_portRESTORE_CONTEXT: .MACRO
 
     R1 = [_pxCurrentTCB]
     SP = [R1]
@@ -127,7 +127,7 @@ _portRESTORE_CONTEXT: .PROC
 
     RETI
 
-.ENDP
+.ENDM
 
 
 

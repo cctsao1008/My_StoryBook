@@ -184,11 +184,14 @@ void IRQ7(void)
 	P_Int_Status = C_IRQ7_64Hz;
     P_Watchdog_Clear = C_Watchdog_Clear;
     
-    vTaskIncrementTick();
-
     #if( configUSE_PREEMPTION == 1 )
-    vPortYield();
+    //vPortYield();
+    portSAVE_CONTEXT();
+    vTaskIncrementTick();
+    vTaskSwitchContext();
+    portRESTORE_CONTEXT();
+    #else
+    vTaskIncrementTick();
     #endif
-
 }
 

@@ -23,7 +23,7 @@ portSTACK_TYPE stack[heap_size];
 
 int main()
 {
-	unsigned int arg = 100;
+	unsigned int arg = 500;
 
     #if 0
     count = sizeof(portSTACK_TYPE)*heap_size;
@@ -74,7 +74,7 @@ void Task_01(void *pvParameters)
 
 void Task_02(void *pvParameters)
 {	
-	#if 1
+	#if 0
     while(1)
     {
     	vTaskDelay( 3 );
