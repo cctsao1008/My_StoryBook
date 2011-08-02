@@ -1,4 +1,5 @@
 .include    ..\..\..\..\..\BSP\include\GPCE063.inc
+.DEFINE     _ASM_PORT
 
 .IFDEF      _ASM_PORT
 .PUBLIC     _vPortStartFirstTask
@@ -9,13 +10,9 @@
 .ENDIF
 
 .PUBLIC     _xPortReadFlagRegister
-.PUBLIC     _portSAVE_CONTEXT
-.PUBLIC     _portRESTORE_CONTEXT
 
 .IFDEF      _ASM_PORT
 .PUBLIC     _IRQ7
-.PUBLIC     _FIQ
-.PUBLIC     _BREAK
 .ENDIF
 
 .EXTERNAL   _pxCurrentTCB
@@ -23,17 +20,17 @@
 .EXTERNAL   _vTaskIncrementTick
 
 
-
+// Macro definition
 PUSHALL: .MACRO
 
     PUSH R1,R5 TO [SP]
-    
+
     .ENDM
 
 POPALL: .MACRO
 
     POP R1,R5 FROM [SP]
-    
+
     .ENDM
 
 PUSHFR: .MACRO
@@ -44,7 +41,7 @@ PUSHFR: .MACRO
     R1 = R1 & R2
     PUSH R1 TO [SP]
     SECBANK OFF
-    
+
     .ENDM
 
 POPFR: .MACRO
@@ -55,15 +52,21 @@ POPFR: .MACRO
     R1 = R1 & R2
     FR = R1
     SECBANK OFF
-    
+
     .ENDM
 
+portSAVE_CONTEXT: .MACRO
 
+    PUSHFR
 
-.CODE
+    PUSHALL
 
-.IFDEF      _ASM_PORT
-_vPortStartFirstTask: .PROC
+    R1 = [_pxCurrentTCB]
+    [R1] = SP
+
+.ENDM
+
+portRESTORE_CONTEXT: .MACRO
 
     R1 = [_pxCurrentTCB]
     SP = [R1]
@@ -71,6 +74,23 @@ _vPortStartFirstTask: .PROC
     POPALL
 
     RETI
+
+.ENDM
+
+// Code section
+.CODE
+
+.IFDEF      _ASM_PORT
+_vPortStartFirstTask: .PROC
+    
+    .IF 0
+    R1 = [_pxCurrentTCB]
+    SP = [R1]
+    POPALL
+    RETI
+    .ELSE
+    portRESTORE_CONTEXT
+    .ENDIF
 
 .ENDP
 .ENDIF
@@ -107,36 +127,12 @@ _xPortReadFlagRegister: .PROC
 
 .ENDP
 
-_portSAVE_CONTEXT: .MACRO
-
-    PUSHFR
-
-    PUSHALL
-
-    R1 = [_pxCurrentTCB]
-    [R1] = SP
-
-.ENDM
-
-_portRESTORE_CONTEXT: .MACRO
-
-    R1 = [_pxCurrentTCB]
-    SP = [R1]
-
-    POPALL
-
-    RETI
-
-.ENDM
-
-
-
-
+// Text section
 .TEXT
 
 .IFDEF      _ASM_PORT
 _IRQ7:
-    
+
     PUSHALL
 
     R1 = C_IRQ7_64Hz
@@ -144,19 +140,12 @@ _IRQ7:
 
     R1 = C_Watchdog_Clear
     [P_Watchdog_Clear] = R1
-    
+
     CALL _vTaskIncrementTick
     CALL _vPortYield
-    
+
     POPALL
 
     RETI
 
-_FIQ:
-
-    RETI
-
-_BREAK:
-
-    RETI
 .ENDIF
