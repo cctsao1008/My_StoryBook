@@ -19,11 +19,12 @@ void Task_02(void *pvParameters);
 
 
 long count = 0;
+portTickType xTick = 0; 
 portSTACK_TYPE stack[heap_size];
 
 int main()
 {
-	unsigned int arg = 500;
+	unsigned int arg = 1000;
 
     #if 0
     count = sizeof(portSTACK_TYPE)*heap_size;
@@ -62,12 +63,13 @@ int main()
 void Task_01(void *pvParameters)
 {	
 	unsigned int *x = pvParameters;
-
     *x = *x;
     
     while(1)
     {
+    	xTick = xTaskGetTickCount();
     	vTaskDelay( 3 );
+    	xTick = xTaskGetTickCount();
         count++;
     }
 }

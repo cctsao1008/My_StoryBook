@@ -1,5 +1,5 @@
 .include    ..\..\..\..\..\BSP\include\GPCE063.inc
-.DEFINE     _ASM_PORT
+//.DEFINE     _ASM_PORT
 
 .IFDEF      _ASM_PORT
 .PUBLIC     _vPortStartFirstTask
@@ -10,6 +10,8 @@
 .ENDIF
 
 .PUBLIC     _xPortReadFlagRegister
+.PUBLIC     _portSAVE_CONTEXT
+.PUBLIC     _portRESTORE_CONTEXT
 
 .IFDEF      _ASM_PORT
 .PUBLIC     _IRQ7
@@ -55,7 +57,15 @@ POPFR: .MACRO
 
     .ENDM
 
-portSAVE_CONTEXT: .MACRO
+// Code section
+.CODE
+
+_portSAVE_CONTEXT: .PROC
+
+    SECBANK ON 
+    POP R3,R4 FROM [SP]
+    PUSH R3,R4 TO [SP]
+    SECBANK OFF
 
     PUSHFR
 
@@ -63,10 +73,16 @@ portSAVE_CONTEXT: .MACRO
 
     R1 = [_pxCurrentTCB]
     [R1] = SP
+    
+    SECBANK ON 
+    PUSH R3,R4 TO [SP]
+    SECBANK OFF
+    
+    RETF
 
-.ENDM
+.ENDP
 
-portRESTORE_CONTEXT: .MACRO
+_portRESTORE_CONTEXT: .PROC
 
     R1 = [_pxCurrentTCB]
     SP = [R1]
@@ -75,15 +91,12 @@ portRESTORE_CONTEXT: .MACRO
 
     RETI
 
-.ENDM
-
-// Code section
-.CODE
+.ENDP
 
 .IFDEF      _ASM_PORT
 _vPortStartFirstTask: .PROC
     
-    .IF 0
+    .IF 1
     R1 = [_pxCurrentTCB]
     SP = [R1]
     POPALL

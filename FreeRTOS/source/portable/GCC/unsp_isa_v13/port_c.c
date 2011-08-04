@@ -80,7 +80,14 @@ static void prvSetupTimerInterrupt( void );
 extern void vPortStartFirstTask( void );
  
 extern portSTACK_TYPE xPortReadFlagRegister( void );
+
+#if 0
 extern void vPortYield( void );
+#else
+void vPortYield( void );
+void portSAVE_CONTEXT( void );
+void portRESTORE_CONTEXT( void );
+#endif
 
 /*
  * See header file for description.
@@ -138,7 +145,7 @@ void vPortEndScheduler( void )
     P_Watchdog_Clear = C_Watchdog_Clear;
 }
 
-#if 0
+#if 1
 void vPortStartFirstTask( void )
 {
     portRESTORE_CONTEXT();
@@ -174,7 +181,7 @@ void vApplicationTickHook( void )
     P_Watchdog_Clear = C_Watchdog_Clear;
 }
 
-#if 0
+#if 1
 // Interrupt
 void IRQ7(void) __attribute__ ((ISR));
 void IRQ7(void)
