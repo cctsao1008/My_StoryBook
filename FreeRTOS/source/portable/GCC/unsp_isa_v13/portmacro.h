@@ -87,8 +87,11 @@
 /*-----------------------------------------------------------*/    
 
 /* Critical section management. */
-#define portENTER_CRITICAL() asm("INT OFF")
-#define portEXIT_CRITICAL()    asm("INT FIQ,IRQ")
+extern void vPortEnterCritical( void );
+extern void vPortExitCritical( void );
+
+#define portENTER_CRITICAL() vPortEnterCritical()
+#define portEXIT_CRITICAL()    vPortExitCritical()
 
 #define portDISABLE_INTERRUPTS() asm("INT OFF")    
 #define portENABLE_INTERRUPTS()    asm("INT FIQ,IRQ")    

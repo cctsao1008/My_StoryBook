@@ -66,6 +66,7 @@
 #include "..\..\..\..\..\BSP\include\GPCE063.h"
 
 /* Each task maintains its own interrupt status in the critical nesting variable. */
+#define portNO_CRITICAL_NESTING					( ( unsigned portBASE_TYPE ) 0 )
 static unsigned portBASE_TYPE uxCriticalNesting = 0;
 
 /*
@@ -81,8 +82,13 @@ extern void vPortStartFirstTask( void );
  
 extern portSTACK_TYPE xPortReadFlagRegister( void );
 
+void vPortEnterCritical( void );
+void vPortExitCritical( void );
+
+
 #if 0
 extern void vPortYield( void );
+extern void vPortYieldFromTick( void );
 #else
 void vPortYield( void );
 void portSAVE_CONTEXT( void );
@@ -179,6 +185,21 @@ void vApplicationIdleHook( void )
 void vApplicationTickHook( void )
 {
     P_Watchdog_Clear = C_Watchdog_Clear;
+}
+
+void vPortEnterCritical( void )
+{
+	portDISABLE_INTERRUPTS();
+	uxCriticalNesting++;
+}
+
+void vPortExitCritical( void )
+{
+	uxCriticalNesting--;
+	if( uxCriticalNesting == portNO_CRITICAL_NESTING )
+	{
+		portENABLE_INTERRUPTS();
+	}
 }
 
 #if 1

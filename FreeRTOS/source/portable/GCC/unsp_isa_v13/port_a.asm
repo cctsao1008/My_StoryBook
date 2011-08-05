@@ -7,6 +7,7 @@
 
 .IFDEF      _ASM_PORT
 .PUBLIC     _vPortYield
+.PUBLIC     _vPortYieldFromTick
 .ENDIF
 
 .PUBLIC     _xPortReadFlagRegister
@@ -109,6 +110,7 @@ _vPortStartFirstTask: .PROC
 .ENDIF
 
 .IFDEF      _ASM_PORT
+
 _vPortYield: .PROC
 
     PUSHFR
@@ -128,6 +130,28 @@ _vPortYield: .PROC
     RETI
 
 .ENDP
+
+_vPortYieldFromTick .PROC
+
+    PUSHFR
+
+    PUSHALL
+
+    R1 = [_pxCurrentTCB]
+    [R1] = SP
+
+    CALL _vTaskIncrementTick
+    CALL _vTaskSwitchContext
+
+    R1 = [_pxCurrentTCB]
+    SP = [R1]
+
+    POPALL
+
+    RETI
+
+.ENDP
+
 .ENDIF
 
 _xPortReadFlagRegister: .PROC
@@ -155,7 +179,6 @@ _IRQ7:
     [P_Watchdog_Clear] = R1
 
     CALL _vTaskIncrementTick
-    CALL _vPortYield
 
     POPALL
 
