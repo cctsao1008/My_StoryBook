@@ -80,7 +80,11 @@ static void prvSetupTimerInterrupt( void );
  */
 extern void vPortStartFirstTask( void );
  
-extern portSTACK_TYPE xPortReadFlagRegister( void );
+extern unsigned portBASE_TYPE uxPortReadFlagRegister( void );
+extern void vPortWriteFlagRegister( unsigned portBASE_TYPE );
+
+unsigned portBASE_TYPE saved_FR = 0;
+
 
 void vPortEnterCritical( void );
 void vPortExitCritical( void );
@@ -114,7 +118,7 @@ portSTACK_TYPE *pxPortInitialiseStack( portSTACK_TYPE *pxTopOfStack, pdTASK_CODE
     #if 0
     *pxTopOfStack-- = (portSTACK_TYPE)0x0078;                 /* push FR to SP */
     #else
-    *pxTopOfStack-- = (portSTACK_TYPE)xPortReadFlagRegister();                 /* push FR to SP */
+    *pxTopOfStack-- = (portSTACK_TYPE)uxPortReadFlagRegister();                 /* push FR to SP */
     #endif
 
     *pxTopOfStack-- = (portSTACK_TYPE)0x5555;                 /* push R5 to sp */
@@ -189,6 +193,7 @@ void vApplicationTickHook( void )
 
 void vPortEnterCritical( void )
 {
+    saved_FR = uxPortReadFlagRegister();
 	portDISABLE_INTERRUPTS();
 	uxCriticalNesting++;
 }
@@ -198,7 +203,8 @@ void vPortExitCritical( void )
 	uxCriticalNesting--;
 	if( uxCriticalNesting == portNO_CRITICAL_NESTING )
 	{
-		portENABLE_INTERRUPTS();
+		vPortWriteFlagRegister( saved_FR );
+		//portENABLE_INTERRUPTS();
 	}
 }
 

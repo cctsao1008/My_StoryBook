@@ -10,7 +10,8 @@
 .PUBLIC     _vPortYieldFromTick
 .ENDIF
 
-.PUBLIC     _xPortReadFlagRegister
+.PUBLIC     _uxPortReadFlagRegister
+.PUBLIC     _vPortWriteFlagRegister
 .PUBLIC     _portSAVE_CONTEXT
 .PUBLIC     _portRESTORE_CONTEXT
 
@@ -154,11 +155,27 @@ _vPortYieldFromTick .PROC
 
 .ENDIF
 
-_xPortReadFlagRegister: .PROC
+_uxPortReadFlagRegister: .PROC
 
     R1 = FR
     R2 = 0x1FFF
     R1 = R1 & R2
+
+    RETF
+
+.ENDP
+
+_vPortWriteFlagRegister: .PROC
+
+    PUSH R1,R5 TO [SP]		
+    BP = SP + 5
+    R1 = [BP+3]
+    
+    R2 = 0x1FFF
+    R1 = R1 & R2
+    FR = R1
+    
+    POP R1,R5 FROM [SP]
 
     RETF
 

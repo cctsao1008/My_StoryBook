@@ -113,12 +113,7 @@ int BSP_INIT(void)
     P_IOB_Attrib->data = 0xFFFF;
     P_IOB_Dir->data    = 0xFFFF;
     
-    // Config Interrupt
-    #if 0
-    P_Int_Ctrl = C_IRQ7_64Hz;
-    #endif
-    
-    //asm("INT FIQ,IRQ");
+    //portENABLE_INTERRUPTS();
     return 0;
 }
 
