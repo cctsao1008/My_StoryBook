@@ -477,7 +477,13 @@ tskTCB * pxNewTCB;
 		#if( portSTACK_GROWTH < 0 )
 		{
 			pxTopOfStack = pxNewTCB->pxStack + ( usStackDepth - ( unsigned short ) 1 );
+
+            // Ricardo modify
+            #if 0
 			pxTopOfStack = ( portSTACK_TYPE * ) ( ( ( portPOINTER_SIZE_TYPE ) pxTopOfStack ) & ( ( portPOINTER_SIZE_TYPE ) ~portBYTE_ALIGNMENT_MASK  ) );
+            #else
+            pxTopOfStack = ( portSTACK_TYPE * ) ( ( ( portSTACK_TYPE ) pxTopOfStack ) & ( ( portSTACK_TYPE ) ~portBYTE_ALIGNMENT_MASK  ) );
+            #endif
 
 			/* Check the alignment of the calculated top of stack is correct. */
 			configASSERT( ( ( ( unsigned long ) pxTopOfStack & ( unsigned long ) portBYTE_ALIGNMENT_MASK ) == 0UL ) );

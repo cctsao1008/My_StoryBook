@@ -9,7 +9,7 @@ VER=3.0.5
 #Name Begin GPCE063A_064A-Debug
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=;hpj;bat
+#PROP Default_Filter=pj;bat
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -181,7 +181,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=n;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=rgs;gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -323,7 +323,7 @@ EXPORT=3
 #Name Begin GPCE063A_064A-Release
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=;hpj;bat
+#PROP Default_Filter=pj;bat
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -495,7 +495,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=n;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=rgs;gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
