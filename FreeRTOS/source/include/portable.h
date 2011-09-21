@@ -1,12 +1,6 @@
 /*
-    FreeRTOS V7.0.1 - Copyright (C) 2011 Real Time Engineers Ltd.
-	
+    FreeRTOS V7.0.2 - Copyright (C) 2011 Real Time Engineers Ltd.
 
-	FreeRTOS supports many tools and architectures. V7.0.0 is sponsored by:
-	Atollic AB - Atollic provides professional embedded systems development 
-	tools for C/C++ development, code analysis and test automation.  
-	See http://www.atollic.com
-	
 
     ***************************************************************************
      *                                                                       *
@@ -310,14 +304,14 @@ portmacro.h has not yet been included - as every portmacro.h provides a
 portENTER_CRITICAL() definition.  Check the demo application for your demo
 to find the path to the correct portmacro.h file. */
 #ifndef portENTER_CRITICAL
-    // P001 : FreeRTOS porting
-    // By Ricardo
-    #if 0
-	#include "portmacro.h"	
-	#else
-	#include "../portable/GCC/unsp_isa_v13/portmacro.h"
-	#endif
-	// P001 END
+// P001 : FreeRTOS porting
+// By Ricardo
+#if 0
+#include "portmacro.h"	
+#else
+#include "../portable/GCC/unsp_isa_v13/portmacro.h"
+#endif
+// P001 END
 #endif
 	
 #if portBYTE_ALIGNMENT == 8

@@ -1,12 +1,6 @@
 /*
-    FreeRTOS V7.0.1 - Copyright (C) 2011 Real Time Engineers Ltd.
-	
+    FreeRTOS V7.0.2 - Copyright (C) 2011 Real Time Engineers Ltd.
 
-	FreeRTOS supports many tools and architectures. V7.0.0 is sponsored by:
-	Atollic AB - Atollic provides professional embedded systems development 
-	tools for C/C++ development, code analysis and test automation.  
-	See http://www.atollic.com
-	
 
     ***************************************************************************
      *                                                                       *
@@ -102,9 +96,9 @@ task.h is included from an application file. */
 
 /* Semaphores do not actually store or copy data, so have an items size of
 zero. */
-#define queueSEMAPHORE_QUEUE_ITEM_LENGTH ( 0 )
-#define queueDONT_BLOCK					 ( ( portTickType ) 0 )
-#define queueMUTEX_GIVE_BLOCK_TIME		 ( ( portTickType ) 0 )
+#define queueSEMAPHORE_QUEUE_ITEM_LENGTH ( ( unsigned portBASE_TYPE ) 0 )
+#define queueDONT_BLOCK					 ( ( portTickType ) 0U )
+#define queueMUTEX_GIVE_BLOCK_TIME		 ( ( portTickType ) 0U )
 
 /*
  * Definition of the queue used by the scheduler.
@@ -548,7 +542,7 @@ xTimeOutType xTimeOut;
 		/* Update the timeout state to see if it has expired yet. */
 		if( xTaskCheckForTimeOut( &xTimeOut, &xTicksToWait ) == pdFALSE )
 		{
-			if( prvIsQueueFull( pxQueue ) )
+			if( prvIsQueueFull( pxQueue ) != pdFALSE )
 			{
 				traceBLOCKING_ON_QUEUE_SEND( pxQueue );
 				vTaskPlaceOnEventList( &( pxQueue->xTasksWaitingToSend ), xTicksToWait );
@@ -565,7 +559,7 @@ xTimeOutType xTimeOut;
 				task is already in a ready list before it yields - in which
 				case the yield will not cause a context switch unless there
 				is also a higher priority task in the pending ready list. */
-				if( !xTaskResumeAll() )
+				if( xTaskResumeAll() == pdFALSE )
 				{
 					portYIELD_WITHIN_API();
 				}
@@ -648,7 +642,7 @@ xTimeOutType xTimeOut;
 			{
 				if( xTaskCheckForTimeOut( &xTimeOut, &xTicksToWait ) == pdFALSE )
 				{
-					if( prvIsQueueFull( pxQueue ) )
+					if( prvIsQueueFull( pxQueue ) != pdFALSE )
 					{
 						traceBLOCKING_ON_QUEUE_SEND( pxQueue );
 						vTaskPlaceOnEventList( &( pxQueue->xTasksWaitingToSend ), xTicksToWait );
@@ -764,7 +758,7 @@ xTimeOutType xTimeOut;
 			{
 				if( xTaskCheckForTimeOut( &xTimeOut, &xTicksToWait ) == pdFALSE )
 				{
-					if( prvIsQueueEmpty( pxQueue ) )
+					if( prvIsQueueEmpty( pxQueue ) != pdFALSE )
 					{
 						traceBLOCKING_ON_QUEUE_RECEIVE( pxQueue );
 
@@ -963,7 +957,7 @@ signed char *pcOriginalReadPosition;
 		/* Update the timeout state to see if it has expired yet. */
 		if( xTaskCheckForTimeOut( &xTimeOut, &xTicksToWait ) == pdFALSE )
 		{
-			if( prvIsQueueEmpty( pxQueue ) )
+			if( prvIsQueueEmpty( pxQueue ) != pdFALSE )
 			{
 				traceBLOCKING_ON_QUEUE_RECEIVE( pxQueue );
 
@@ -982,7 +976,7 @@ signed char *pcOriginalReadPosition;
 
 				vTaskPlaceOnEventList( &( pxQueue->xTasksWaitingToReceive ), xTicksToWait );
 				prvUnlockQueue( pxQueue );
-				if( !xTaskResumeAll() )
+				if( xTaskResumeAll() == pdFALSE )
 				{
 					portYIELD_WITHIN_API();
 				}
@@ -1269,7 +1263,7 @@ signed portBASE_TYPE xReturn;
 	between the check to see if the queue is full and blocking on the queue. */
 	portDISABLE_INTERRUPTS();
 	{
-		if( prvIsQueueFull( pxQueue ) )
+		if( prvIsQueueFull( pxQueue ) != pdFALSE )
 		{
 			/* The queue is full - do we want to block or just leave without
 			posting? */
@@ -1413,7 +1407,7 @@ signed portBASE_TYPE xQueueCRSendFromISR( xQueueHandle pxQueue, const void *pvIt
 
 		/* We only want to wake one co-routine per ISR, so check that a
 		co-routine has not already been woken. */
-		if( !xCoRoutinePreviouslyWoken )
+		if( xCoRoutinePreviouslyWoken == pdFALSE )
 		{
 			if( listLIST_IS_EMPTY( &( pxQueue->xTasksWaitingToReceive ) ) == pdFALSE )
 			{
@@ -1448,7 +1442,7 @@ signed portBASE_TYPE xReturn;
 		--( pxQueue->uxMessagesWaiting );
 		memcpy( ( void * ) pvBuffer, ( void * ) pxQueue->pcReadFrom, ( unsigned ) pxQueue->uxItemSize );
 
-		if( !( *pxCoRoutineWoken ) )
+		if( ( *pxCoRoutineWoken ) == pdFALSE )
 		{
 			if( listLIST_IS_EMPTY( &( pxQueue->xTasksWaitingToSend ) ) == pdFALSE )
 			{
@@ -1479,7 +1473,7 @@ signed portBASE_TYPE xReturn;
 
 		/* See if there is an empty space in the registry.  A NULL name denotes
 		a free slot. */
-		for( ux = ( unsigned portBASE_TYPE ) 0U; ux < configQUEUE_REGISTRY_SIZE; ux++ )
+		for( ux = ( unsigned portBASE_TYPE ) 0U; ux < ( unsigned portBASE_TYPE ) configQUEUE_REGISTRY_SIZE; ux++ )
 		{
 			if( xQueueRegistry[ ux ].pcQueueName == NULL )
 			{
@@ -1502,7 +1496,7 @@ signed portBASE_TYPE xReturn;
 
 		/* See if the handle of the queue being unregistered in actually in the
 		registry. */
-		for( ux = ( unsigned portBASE_TYPE ) 0U; ux < configQUEUE_REGISTRY_SIZE; ux++ )
+		for( ux = ( unsigned portBASE_TYPE ) 0U; ux < ( unsigned portBASE_TYPE ) configQUEUE_REGISTRY_SIZE; ux++ )
 		{
 			if( xQueueRegistry[ ux ].xHandle == xQueue )
 			{
