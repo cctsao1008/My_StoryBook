@@ -24,16 +24,16 @@ NONPAGE0=0
 [LIBRARY]
 Count=3
 LIB0=CMacro1216.lib
-LIB1=..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\Libmem.lib
-LIB2=..\..\..\..\Program Files\Generalplus\unSPIDE 3.0.5\Library\CLib16\Lib\CLib.lib
+LIB1=Libmem.lib
+LIB2=CLib.lib
 
 [SYMBOL]
 Count=0
 
 [Option]
 CC_LOC=$(APPDIR)\gcc
-CC_FLAG_D=-S -gstabs -Wall
-CC_FLAG_R=-S -O1 -Wall
+CC_FLAG_D=-S -gstabs -Wall -mglobal-var-iram
+CC_FLAG_R=-S -O1 -Wall -mglobal-var-iram
 AS_LOC=$(APPDIR)\xasm16
 AS_FLAG_D=-t5 -d -sr
 AS_FLAG_R=-t5 -sr
@@ -48,7 +48,7 @@ IsGenRes=1
 IsInitGlobal=1
 IsGenList=0
 CurIsa=ISA13
-IsWall=1
+IsWall=0
 POINTER=0
 
 [AdvancedHard]

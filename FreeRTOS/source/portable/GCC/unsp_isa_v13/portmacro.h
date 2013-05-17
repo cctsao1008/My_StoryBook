@@ -76,6 +76,8 @@
 #define portSHORT       short
 #define portSTACK_TYPE  unsigned portCHAR
 #define portBASE_TYPE   char
+#define portPOINTER_SIZE_TYPE unsigned portCHAR
+
 
 #if( configUSE_16_BIT_TICKS == 1 )
     typedef unsigned portSHORT portTickType;
