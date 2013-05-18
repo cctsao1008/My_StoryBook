@@ -9,7 +9,7 @@ VER=3.0.5
 #Name Begin GPCE063A_064A-Debug
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=hpj;bat
+#PROP Default_Filter=at
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -118,14 +118,35 @@ USEPARAM=FALSE
 PARAM=
 EXPORT=3
 # Begin Source File
-SOURCE=isr.c
+SOURCE=main.c
 USEPARAM=FALSE
 PARAM=
 ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=main.c
+SOURCE=System.asm
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=SACM_A1600_User.asm
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=Isr_a.asm
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=isr_c.c
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -158,6 +179,26 @@ ID=
 EXPORT=3
 # End Source File
 # End Group
+# Begin Group "pff"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\pff\src\diskio.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=538976288
+# End Source File
+# Begin Source File
+SOURCE=..\pff\src\pff.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
 # End Group
 # End Group
 # Begin Group "Head Files"
@@ -181,7 +222,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -316,6 +357,48 @@ USEPARAM=FALSE
 PARAM=
 ID=
 EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=SACM.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=GPCE063.inc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=A1600.inc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\pff\src\pff.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\pff\src\diskio.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\pff\src\integer.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
 # End Source File
 # End Group
 # End SubItem
@@ -323,7 +406,7 @@ EXPORT=3
 #Name Begin GPCE063A_064A-Release
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=hpj;bat
+#PROP Default_Filter=at
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -432,14 +515,35 @@ USEPARAM=FALSE
 PARAM=
 EXPORT=3
 # Begin Source File
-SOURCE=isr.c
+SOURCE=main.c
 USEPARAM=FALSE
 PARAM=
 ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=main.c
+SOURCE=System.asm
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=SACM_A1600_User.asm
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=Isr_a.asm
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=isr_c.c
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -472,6 +576,26 @@ ID=
 EXPORT=3
 # End Source File
 # End Group
+# Begin Group "pff"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\pff\src\diskio.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=538976288
+# End Source File
+# Begin Source File
+SOURCE=..\pff\src\pff.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
 # End Group
 # End Group
 # Begin Group "Head Files"
@@ -495,7 +619,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=;rgs;gif;jpg;jpeg;jpe
+#PROP Default_Filter=gif;jpg;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -630,6 +754,48 @@ USEPARAM=FALSE
 PARAM=
 ID=
 EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=SACM.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=GPCE063.inc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=A1600.inc
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\pff\src\pff.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\pff\src\diskio.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\pff\src\integer.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
 # End Source File
 # End Group
 # End SubItem

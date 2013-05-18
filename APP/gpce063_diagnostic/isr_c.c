@@ -1,7 +1,9 @@
 //isr.c
 void BREAK(void) __attribute__ ((ISR));
 
+#if 0
 void FIQ(void) __attribute__ ((ISR));
+#endif
 
 void IRQ0(void) __attribute__ ((ISR));
 
@@ -27,11 +29,13 @@ void BREAK(void)
 
 }
 
+#if 0
 void FIQ(void)
 {
 	//add your code here
 
 }
+#endif
 
 void IRQ0(void)
 {

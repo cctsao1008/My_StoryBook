@@ -22,10 +22,11 @@ INITTABLE=1
 NONPAGE0=0
 
 [LIBRARY]
-Count=3
+Count=4
 LIB0=CMacro1216.lib
 LIB1=Libmem.lib
 LIB2=CLib.lib
+LIB3=.\lib\SACM_A1600_V41b_Beta03.lib
 
 [SYMBOL]
 Count=0

@@ -1,4 +1,11 @@
 # Begin Project
 # Begin SubItem "gpce063_diagnostic  Resources"
+# Begin Source File
+SOURCE=voice\squeeze_toy_8khz.a16
+USEPARAM=FALSE
+PARAM=
+ID=RES_SQUEEZE_TOY_8KHZ_A16
+EXPORT=3
+# End Source File
 # End SubItem
 # End Project
