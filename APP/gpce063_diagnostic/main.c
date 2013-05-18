@@ -56,25 +56,31 @@ int main()
 {
 	unsigned int arg = 1000;
 
-    #if 0
-    count = sizeof(portSTACK_TYPE)*heap_size;
-    count = sizeof(size_t); // 1 word
-    count = sizeof(char); // 1 word
-    count = sizeof(unsigned char); // 1 word
-    count = sizeof(int); // 1 word
-    count = sizeof(unsigned int); // 1 word
-    count = sizeof(long); // 2 word
-    count = sizeof(unsigned long); // 2 word
-    count = sizeof(float); // 2 word
-    count = sizeof(short); // 1 word
+    #if 1
+    count = sizeof(portSTACK_TYPE)*configTOTAL_HEAP_SIZE;
+    // char, unsigned char
+    count = sizeof(char);           // 1 word
+    count = sizeof(unsigned char);  // 1 word
+    // int, unsigned int
+    count = sizeof(int);            // 1 word
+    count = sizeof(unsigned int);   // 1 word
+    // short, unsigned short
+    count = sizeof(short);          // 1 word
     count = sizeof(unsigned short); // 1 word
+    // long, unsigned long
+    count = sizeof(long);           // 2 words
+    count = sizeof(unsigned long);  // 2 words
+    // float
+    count = sizeof(float);          // 2 words
+    // double
+    count = sizeof(double);         // 2 words
     #endif
 
     BSP_INIT();
     
     init_heap((size_t)stack,configTOTAL_HEAP_SIZE);
     
-    //xTaskCreate(Task_01, (signed portCHAR *)"Task_01", configMINIMAL_STACK_SIZE, (void*)&arg, 3, NULL );
+    xTaskCreate(Task_01, (signed portCHAR *)"Task_01", configMINIMAL_STACK_SIZE, (void*)&arg, 4, NULL );
     //xTaskCreate(Task_02, (signed portCHAR *)"Task_02", configMINIMAL_STACK_SIZE, (void*)&arg, 6, NULL );
     xTaskCreate(CDecoder, (signed portCHAR *)"CDecoder", configMINIMAL_STACK_SIZE, (void*)&arg, 3, NULL );
     
@@ -98,10 +104,8 @@ void Task_01(void *pvParameters)
     
     while(1)
     {
-    	xTick = xTaskGetTickCount();
-    	vTaskDelay( 3 );
-    	xTick = xTaskGetTickCount();
-        count++;
+    	vTaskDelay( 5000 / portTICK_RATE_MS );
+    	SACM_A1600_Play(0, DAC1 + DAC2, Ramp_Up + Ramp_Dn);		// play speech
     }
 }
 
@@ -143,6 +147,8 @@ int BSP_INIT(void)
     P_IOB_Data->data   = 0x0000;
     P_IOB_Attrib->data = 0xFFFF;
     P_IOB_Dir->data    = 0xFFFF;
+
+    System_Initial();			// System initial
     
     //portENABLE_INTERRUPTS();
     return 0;
@@ -162,7 +168,7 @@ void CDecoder(void *pvParameters)
 	//unsigned PauseFlag = 0;
 	unsigned PlayCon = 0;
 
-	System_Initial();			// System initial
+	//System_Initial();			// System initial
 	//SPI_Initial();				// SPI initial
 	SACM_A1600_Initial();		// A1600 initial
 	SACM_A1600_Play(SpeechIndex, DAC1 + DAC2, Ramp_Up + Ramp_Dn);	// playback with auto mode

@@ -106,6 +106,19 @@ EXPORT=3
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
+# Begin Group "Drivers"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\..\BSP\drivers\drv_i2c_soft.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
 # End Group
 # Begin Group "APP"
 #PROP Default_Filter=
@@ -395,6 +408,13 @@ EXPORT=0
 # End Source File
 # Begin Source File
 SOURCE=..\pff\src\integer.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\BSP\drivers\drv_i2c.h
 USEPARAM=FALSE
 PARAM=
 ID=
@@ -503,6 +523,19 @@ EXPORT=3
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
+# Begin Group "Drivers"
+#PROP Default_Filter=
+USEPARAM=FALSE
+PARAM=
+EXPORT=3
+# Begin Source File
+SOURCE=..\..\BSP\drivers\drv_i2c_soft.c
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# End Group
 # End Group
 # Begin Group "APP"
 #PROP Default_Filter=
@@ -792,6 +825,13 @@ EXPORT=0
 # End Source File
 # Begin Source File
 SOURCE=..\pff\src\integer.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=0
+# End Source File
+# Begin Source File
+SOURCE=..\..\BSP\drivers\drv_i2c.h
 USEPARAM=FALSE
 PARAM=
 ID=

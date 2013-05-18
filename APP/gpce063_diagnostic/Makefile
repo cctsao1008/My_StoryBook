@@ -1,6 +1,6 @@
 #####################################################################
 #																	 
-#	Created by u'nSP IDE		13:40:32	05/18/13
+#	Created by u'nSP IDE		18:07:16	05/18/13
 #
 #####################################################################
 
@@ -61,6 +61,7 @@ OBJFILES	= \
 	"$(OUTDIR)\port_c.obj" \
 	"$(OUTDIR)\port_a.obj" \
 	"$(OUTDIR)\heap_3.obj" \
+	"$(OUTDIR)\drv_i2c_soft.obj" \
 	"$(OUTDIR)\main.obj" \
 	"$(OUTDIR)\System.obj" \
 	"$(OUTDIR)\SACM_A1600_User.obj" \
@@ -129,6 +130,13 @@ OBJFILES	= \
 "$(OUTDIR)\heap_3.obj": "$(OUTDIR)\heap_3.asm"
 	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\heap_3.obj" "$(OUTDIR)\heap_3.asm" 
 
+"$(OUTDIR)\drv_i2c_soft.asm": "D:\RC_CODE\git_gpce063a_freertos\BSP\drivers\drv_i2c_soft.c" "D:\RC_CODE\git_gpce063a_freertos\BSP\drivers\drv_i2c.h" 
+	set PATH="$(APPDIR)\toolchain\";%PATH% & \
+	$(CC) $(CFLAGS) -o "$(OUTDIR)/drv_i2c_soft.asm" "D:/RC_CODE/git_gpce063a_freertos/BSP/drivers/drv_i2c_soft.c" 
+
+"$(OUTDIR)\drv_i2c_soft.obj": "$(OUTDIR)\drv_i2c_soft.asm"
+	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\drv_i2c_soft.obj" "$(OUTDIR)\drv_i2c_soft.asm" 
+
 "$(OUTDIR)\main.asm": "D:\RC_CODE\git_gpce063a_freertos\APP\gpce063_diagnostic\main.c" "D:\RC_CODE\git_gpce063a_freertos\FreeRTOS\source\include\FreeRTOS.h" "D:\RC_CODE\git_gpce063a_freertos\FreeRTOS\source\include\task.h" "D:\RC_CODE\git_gpce063a_freertos\FreeRTOS\source\include\croutine.h" "D:\RC_CODE\git_gpce063a_freertos\FreeRTOS\source\include\semphr.h" "D:\RC_CODE\git_gpce063a_freertos\BSP\include\GPCE063.h" ".\SACM.h" "D:\RC_CODE\git_gpce063a_freertos\FreeRTOS\source\include\projdefs.h" "D:\RC_CODE\git_gpce063a_freertos\APP\include\FreeRTOSConfig.h" "D:\RC_CODE\git_gpce063a_freertos\FreeRTOS\source\include\portable.h" "D:\RC_CODE\git_gpce063a_freertos\FreeRTOS\source\include\list.h" "D:\RC_CODE\git_gpce063a_freertos\FreeRTOS\source\include\queue.h" "D:\RC_CODE\git_gpce063a_freertos\FreeRTOS\source\portable\GCC\unsp_isa_v13\portmacro.h" "D:\RC_CODE\git_gpce063a_freertos\FreeRTOS\source\include\mpu_wrappers.h" "C:\Generalplus\unSPIDE 3.0.5\library\include\stddef.h" "C:\Generalplus\unSPIDE 3.0.5\library\include\string.h" "C:\Generalplus\unSPIDE 3.0.5\library\include\memory.h" "C:\Generalplus\unSPIDE 3.0.5\library\include\stdlib.h" "C:\Generalplus\unSPIDE 3.0.5\library\include\reent.h" "C:\Generalplus\unSPIDE 3.0.5\library\include\sys\reent.h" "C:\Generalplus\unSPIDE 3.0.5\library\include\_ansi.h" "C:\Generalplus\unSPIDE 3.0.5\library\include\machine/_types.h" "C:\Generalplus\unSPIDE 3.0.5\library\include\assert.h" "C:\Generalplus\unSPIDE 3.0.5\library\include\limits.h" 
 	set PATH="$(APPDIR)\toolchain\";%PATH% & \
 	$(CC) $(CFLAGS) -o "$(OUTDIR)/main.asm" "D:/RC_CODE/git_gpce063a_freertos/APP/gpce063_diagnostic/main.c" 
@@ -136,13 +144,13 @@ OBJFILES	= \
 "$(OUTDIR)\main.obj": "$(OUTDIR)\main.asm"
 	$(AS) $(CASFLAGS) $(INCLUDES) -o "$(OUTDIR)\main.obj" "$(OUTDIR)\main.asm" 
 
-"$(OUTDIR)\System.obj": "D:\RC_CODE\git_gpce063a_freertos\APP\gpce063_diagnostic\System.asm" 
+"$(OUTDIR)\System.obj": "D:\RC_CODE\git_gpce063a_freertos\APP\gpce063_diagnostic\System.asm" ".\GPCE063.inc" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\System.obj" "D:\RC_CODE\git_gpce063a_freertos\APP\gpce063_diagnostic\System.asm" 
 
-"$(OUTDIR)\SACM_A1600_User.obj": "D:\RC_CODE\git_gpce063a_freertos\APP\gpce063_diagnostic\SACM_A1600_User.asm" 
+"$(OUTDIR)\SACM_A1600_User.obj": "D:\RC_CODE\git_gpce063a_freertos\APP\gpce063_diagnostic\SACM_A1600_User.asm" ".\GPCE063.inc" ".\A1600.inc" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\SACM_A1600_User.obj" "D:\RC_CODE\git_gpce063a_freertos\APP\gpce063_diagnostic\SACM_A1600_User.asm" 
 
-"$(OUTDIR)\Isr_a.obj": "D:\RC_CODE\git_gpce063a_freertos\APP\gpce063_diagnostic\Isr_a.asm" 
+"$(OUTDIR)\Isr_a.obj": "D:\RC_CODE\git_gpce063a_freertos\APP\gpce063_diagnostic\Isr_a.asm" ".\GPCE063.inc" ".\A1600.inc" 
 	$(AS) $(ASFLAGS) $(INCLUDES) -o "$(OUTDIR)\Isr_a.obj" "D:\RC_CODE\git_gpce063a_freertos\APP\gpce063_diagnostic\Isr_a.asm" 
 
 "$(OUTDIR)\isr_c.asm": "D:\RC_CODE\git_gpce063a_freertos\APP\gpce063_diagnostic\isr_c.c" 
@@ -222,6 +230,9 @@ clean :
 	$(RM) "$(OUTDIR)\heap_3.obj" 
 	$(RM) "$(OUTDIR)\heap_3.lst" 
 	$(RM) "$(OUTDIR)\heap_3.asm" 
+	$(RM) "$(OUTDIR)\drv_i2c_soft.obj" 
+	$(RM) "$(OUTDIR)\drv_i2c_soft.lst" 
+	$(RM) "$(OUTDIR)\drv_i2c_soft.asm" 
 	$(RM) "$(OUTDIR)\main.obj" 
 	$(RM) "$(OUTDIR)\main.lst" 
 	$(RM) "$(OUTDIR)\main.asm" 
