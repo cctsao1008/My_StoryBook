@@ -175,7 +175,7 @@ F_WatchdogClear:
 F_System_ServiceLoop:
 	call F_Key_DebounceCnt_Down;		// debounce counter countdown
 	call F_Key_Scan_ServiceLoop;		// key scan
-	call F_WatchdogClear;				// clear watchdog register
+	call F_WatchdogClear;			// clear watchdog register
 	retf;
 	.endp;
 

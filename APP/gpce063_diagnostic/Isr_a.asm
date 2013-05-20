@@ -9,16 +9,16 @@
 // 2. For FIQ, IRQ1 ~ IRQ7, user needs to clear P_INT_Clear before 
 //    exiting interrupt routine
 // 3. 
-// 	_FIQ:	FIQ								// Fast interrupt entry
-//  _IRQ0:	TimerA							// interrupt entry
-//  _IRQ1:	TimerB							// interrupt entry
-//  _IRQ2:	TimerC							// interrupt entry
-//  _IRQ3:	UART, SPI, SIO					// interrupt entry
-//  _IRQ4:	SPU								// interrupt entry
-//  _IRQ5:	KEY, EXT1, EXT2					// interrupt entry
-//  _IRQ6:	512Hz, 2KHz, 4KHz				// interrupt entry     
-//  _IRQ7:	2Hz, 16Hz, 64Hz					// interrupt entry
-//  _Break: Software interrupt              // interrupt entry
+//  _FIQ:	FIQ			    // Fast interrupt entry
+//  _IRQ0:	TimerA			    // interrupt entry
+//  _IRQ1:	TimerB			    // interrupt entry
+//  _IRQ2:	TimerC			    // interrupt entry
+//  _IRQ3:	UART, SPI, SIO		    // interrupt entry
+//  _IRQ4:	SPU			    // interrupt entry
+//  _IRQ5:	KEY, EXT1, EXT2		    // interrupt entry
+//  _IRQ6:	512Hz, 2KHz, 4KHz	    // interrupt entry     
+//  _IRQ7:	2Hz, 16Hz, 64Hz		    // interrupt entry
+//  _Break:     Software interrupt          // interrupt entry
 //==========================================================================
 //**************************************************************************
 // Header File Included Area
@@ -31,8 +31,8 @@
 //**************************************************************************
 .define Foreground		0
 .define Background		1
-.define ServiceType		Foreground
-//.define ServiceType		Background
+//.define ServiceType		Foreground
+.define ServiceType		Background
 .define ASM_IRQ         0
 
 //**************************************************************************

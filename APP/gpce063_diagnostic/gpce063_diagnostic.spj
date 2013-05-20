@@ -9,7 +9,7 @@ VER=3.0.5
 #Name Begin GPCE063A_064A-Debug
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=at
+#PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -116,7 +116,7 @@ SOURCE=..\..\BSP\drivers\drv_i2c_soft.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # End Group
 # End Group
@@ -202,14 +202,14 @@ SOURCE=..\pff\src\diskio.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=538976288
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\pff\src\pff.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # End Group
 # End Group
@@ -235,7 +235,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=gif;jpg;jpeg;jpe
+#PROP Default_Filter=;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -393,32 +393,32 @@ ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\pff\src\pff.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=0
-# End Source File
-# Begin Source File
 SOURCE=..\pff\src\diskio.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\pff\src\integer.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\BSP\drivers\drv_i2c.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\pff\src\pff.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
 # End Source File
 # End Group
 # End SubItem
@@ -426,7 +426,7 @@ EXPORT=0
 #Name Begin GPCE063A_064A-Release
 # Begin SubItem "gpce063_diagnostic  files"
 # Begin Group "Source Files"
-#PROP Default_Filter=at
+#PROP Default_Filter=
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -533,7 +533,7 @@ SOURCE=..\..\BSP\drivers\drv_i2c_soft.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # End Group
 # End Group
@@ -619,14 +619,14 @@ SOURCE=..\pff\src\diskio.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=538976288
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\pff\src\pff.c
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # End Group
 # End Group
@@ -652,7 +652,7 @@ EXPORT=3
 # End Source File
 # End Group
 # Begin Group "External Dependencies"
-#PROP Default_Filter=gif;jpg;jpeg;jpe
+#PROP Default_Filter=;jpeg;jpe
 USEPARAM=FALSE
 PARAM=
 EXPORT=3
@@ -810,32 +810,32 @@ ID=
 EXPORT=3
 # End Source File
 # Begin Source File
-SOURCE=..\pff\src\pff.h
-USEPARAM=FALSE
-PARAM=
-ID=
-EXPORT=0
-# End Source File
-# Begin Source File
 SOURCE=..\pff\src\diskio.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\pff\src\integer.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
 # End Source File
 # Begin Source File
 SOURCE=..\..\BSP\drivers\drv_i2c.h
 USEPARAM=FALSE
 PARAM=
 ID=
-EXPORT=0
+EXPORT=3
+# End Source File
+# Begin Source File
+SOURCE=..\pff\src\pff.h
+USEPARAM=FALSE
+PARAM=
+ID=
+EXPORT=3
 # End Source File
 # End Group
 # End SubItem

@@ -92,32 +92,52 @@
  *----------------------------------------------------------*/
 
 #define configUSE_PREEMPTION                1
-#define configUSE_IDLE_HOOK                 1
-#define configUSE_TICK_HOOK                 1
 #define configCPU_CLOCK_HZ                  ( ( unsigned long ) 49152000 ) // 49.152MHz
 #define configTICK_RATE_HZ                  ( ( portTickType ) 64 ) //64 Hz
-#define configMAX_PRIORITIES                ( ( unsigned portBASE_TYPE ) 10 )
+#define configMAX_PRIORITIES                ( ( unsigned portBASE_TYPE ) 8 )
 #define configMINIMAL_STACK_SIZE            ( ( unsigned short ) 128 )
-#define configTOTAL_HEAP_SIZE               ( ( size_t ) ( 512 ) )
-#define configMAX_TASK_NAME_LEN             ( 16 )
+#define configTOTAL_HEAP_SIZE               ( ( size_t ) ( 1024 ) )
 #define configUSE_TRACE_FACILITY            0
 #define configUSE_16_BIT_TICKS              1
 #define configIDLE_SHOULD_YIELD             1
+#define configUSE_MUTEXES                   0
+#define configUSE_RECURSIVE_MUTEXES         0
+#define configUSE_COUNTING_SEMAPHORES       0
+#define configUSE_ALTERNATIVE_API           0 /* Deprecated! */
+#define configQUEUE_REGISTRY_SIZE           10
+#define configUSE_QUEUE_SETS                0
+
+/* Hook function related definitions. */
+#define configUSE_IDLE_HOOK                 1
+#define configUSE_TICK_HOOK                 1
+#define configCHECK_FOR_STACK_OVERFLOW      0
+#define configUSE_MALLOC_FAILED_HOOK        0
 
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES               0
-#define configMAX_CO_ROUTINE_PRIORITIES     ( 1 )
+#define configMAX_CO_ROUTINE_PRIORITIES     1
 
-/* Set the following definitions to 1 to include the API function, or zero
-to exclude the API function. */
+/* Define to trap errors during development. */
+//#define configASSERT( ( x ) )     if( ( x ) == 0 ) vCallAssert( __FILE__, __LINE__ )
 
-#define INCLUDE_vTaskPrioritySet            0
-#define INCLUDE_uxTaskPriorityGet           0
-#define INCLUDE_vTaskDelete                 0
-#define INCLUDE_vTaskCleanUpResources       0
-#define INCLUDE_vTaskSuspend                0
-#define INCLUDE_vTaskDelayUntil             0
-#define INCLUDE_vTaskDelay                  1
+/* Optional functions - most linkers will remove unused functions anyway. */
+#define INCLUDE_vTaskPrioritySet                0
+#define INCLUDE_uxTaskPriorityGet               0
+#define INCLUDE_vTaskDelete                     0
+#define INCLUDE_vTaskSuspend                    0
+#define INCLUDE_xResumeFromISR                  0
+#define INCLUDE_vTaskDelayUntil                 0
+#define INCLUDE_vTaskDelay                      1
+#define INCLUDE_xTaskGetSchedulerState          0
+#define INCLUDE_xTaskGetCurrentTaskHandle       0
+#define INCLUDE_uxTaskGetStackHighWaterMark     0
+#define INCLUDE_xTaskGetIdleTaskHandle          0
+#define INCLUDE_xTimerGetTimerDaemonTaskHandle  0
+#define INCLUDE_pcTaskGetTaskName               0
+#define INCLUDE_eTaskGetState                   0
+
+/* A header file that defines trace macro can be included here. */
+
 
 #endif /* FREERTOS_CONFIG_H */
 

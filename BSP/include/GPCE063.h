@@ -39,6 +39,30 @@
 #ifndef    __GPCE063_H__
 #define    __GPCE063_H__
 
+typedef union tagIOBITS {
+
+    unsigned int data;
+
+    struct {
+        unsigned bit_0 :1;
+        unsigned bit_1 :1;
+        unsigned bit_2 :1;
+        unsigned bit_3 :1;
+        unsigned bit_4 :1;
+        unsigned bit_5 :1;
+        unsigned bit_6 :1;
+        unsigned bit_7 :1;
+        unsigned bit_8 :1;
+        unsigned bit_9 :1;
+        unsigned bit_10:1;
+        unsigned bit_11:1;
+        unsigned bit_12:1;
+        unsigned bit_13:1;
+        unsigned bit_14:1;
+        unsigned bit_15:1;
+    };
+} *IO_BITS;
+
 //////////////////////////////////////////////////////////////////////////////////////
 //====================================================================================
 //  Port Definition
@@ -617,32 +641,6 @@
 #define C_Bit13             0x2000
 #define C_Bit14             0x4000
 #define C_Bit15             0x8000
-
-typedef union tagIOBITS {
-
-    unsigned int data;
-
-    struct {
-
-        unsigned B0 :1;
-        unsigned B1 :1;
-        unsigned B2 :1;
-        unsigned B3 :1;
-        unsigned B4 :1;
-        unsigned B5 :1;
-        unsigned B6 :1;
-        unsigned B7 :1;
-        unsigned B8 :1;
-        unsigned B9 :1;
-        unsigned B10:1;
-        unsigned B11:1;
-        unsigned B12:1;
-        unsigned B13:1;
-        unsigned B14:1;
-        unsigned B15:1;
-
-    };
-} *IO_BITS;
 
 #ifndef sbi
 #define sbi(x,y)    x|=(1 << (y))

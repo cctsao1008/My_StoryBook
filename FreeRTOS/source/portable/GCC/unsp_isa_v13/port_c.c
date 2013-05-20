@@ -185,22 +185,19 @@ static void prvSetupTimerInterrupt( void )
     P_Watchdog_Clear = C_Watchdog_Clear;
     // Config Interrupt
     P_Int_Ctrl |= C_IRQ7_64Hz;
-    saved_FR |= 0x0020;
-    asm("INT IRQ");
+
+    portENABLE_INTERRUPTS();
 }
 
 void vApplicationIdleHook( void )
 {
+    portENABLE_INTERRUPTS();
     P_Watchdog_Clear = C_Watchdog_Clear;
-    
-    // manual to increment time tick to debug : Ricardo
-    #if 0
-    vTaskIncrementTick();
-    #endif
 }
 
 void vApplicationTickHook( void )
 {
+    portENABLE_INTERRUPTS();
     P_Watchdog_Clear = C_Watchdog_Clear;
 }
 
