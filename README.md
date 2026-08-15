@@ -1,4 +1,4 @@
-# My StoryBook — GPCE063 / FreeRTOS Embedded Demo
+# GPCE063 FreeRTOS Storybook — Embedded Demo
 
 Historical embedded-software project for a storybook / interactive-audio device built around the Sunplus GPCE063 platform and FreeRTOS.
 
@@ -23,7 +23,7 @@ The repository history also documents work on the FreeRTOS port itself, includin
 ## Repository Layout
 
 ```text
-My_StoryBook/
+gpce063-freertos-storybook/
 ├── APP/
 │   ├── gpce063_diagnostic/   GPCE063 diagnostics, audio and platform experiments
 │   ├── pff/                  Petit FAT file-system support / samples
@@ -152,9 +152,11 @@ A modern rebuild may require reconstructing the original vendor toolchain, proje
 
 This repository and [`tom_wheel_demo`](https://github.com/cctsao1008/tom_wheel_demo) share a significant portion of their historical code lineage, including FreeRTOS porting, GPCE063 diagnostics, audio work, Petit FAT integration, and sensor / I2C experiments.
 
-`My_StoryBook` is retained as its own historical project snapshot because it represents the storybook-oriented branch / usage context of that work.
+This repository is retained as its own historical project snapshot because it represents the storybook-oriented branch / usage context of that work.
 
 ## Historical Notes
+
+The repository was originally published under the name `My_StoryBook` and was later renamed to `gpce063-freertos-storybook` to make the platform, RTOS, and application context explicit.
 
 The current default branch is `FREERTOS`, reflecting the branch on which the FreeRTOS-based implementation is preserved.
 
